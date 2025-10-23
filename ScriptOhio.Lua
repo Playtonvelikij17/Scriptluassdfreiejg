@@ -14,11 +14,15 @@ local TeleportUpNumber = 100
 local TeleportDirectlyNumber = -20
 local SpeedPlayer = 25
 
+local Minimum_Health_TeleportUp = 50
+
 local Second_To_CreateUI = 3
 
 
 local IsFly = false
 local IsEspPlayer = false
+local IsPlayerAnchored = false
+local IsAutoTeleportUpSmallHealth = false
 
 
 local Player = nil
@@ -26,6 +30,8 @@ local Character = nil
 local Humanoid:Humanoid = nil
 local Hrp:BasePart = nil
 local PartFly:BasePart = nil
+
+local TextToAutoSmallHealth = "Auto Teleport Up Small Health: "
 
 local function Speed()
 	local Player = Players.LocalPlayer
@@ -145,16 +151,30 @@ local function AddedUI()
 		
 		
 		
-		local ButtonHidePlayer = Instance.new("TextButton")
-		ButtonHidePlayer.Size = UDim2.new(0.16, 0,0.198, 0)
-		ButtonHidePlayer.Position = UDim2.new(0.23, 0,0.228, 0)
-		ButtonHidePlayer.BackgroundColor3 = Color3.fromRGB(103,103,103)
-		ButtonHidePlayer.TextStrokeTransparency = 0
-		ButtonHidePlayer.TextColor3 = Color3.fromRGB(255, 255, 255)
-		ButtonHidePlayer.TextScaled = true
-		ButtonHidePlayer.BorderSizePixel = 3
+		local ButtonPlayerAnchored = Instance.new("TextButton")
+		ButtonPlayerAnchored.Size = UDim2.new(0.16, 0,0.198, 0)
+		ButtonPlayerAnchored.Position = UDim2.new(0.23, 0,0.228, 0)
+		ButtonPlayerAnchored.BackgroundColor3 = Color3.fromRGB(103,103,103)
+		ButtonPlayerAnchored.TextStrokeTransparency = 0
+		ButtonPlayerAnchored.TextColor3 = Color3.fromRGB(255, 255, 255)
+		ButtonPlayerAnchored.TextScaled = true
+		ButtonPlayerAnchored.BorderSizePixel = 3
 
-		ButtonHidePlayer.Text = "More info Coming Soon!"
+		ButtonPlayerAnchored.Text = "Player Anchored: "  .. tostring(IsPlayerAnchored)
+		
+		
+		
+		local ButtonAutoTeleportUpSmallHealth = Instance.new("TextButton")
+		ButtonAutoTeleportUpSmallHealth.Size = UDim2.new(0.16, 0,0.198, 0)
+		ButtonAutoTeleportUpSmallHealth.Position = UDim2.new(0.441, 0,0.228, 0)
+		ButtonAutoTeleportUpSmallHealth.BackgroundColor3 = Color3.fromRGB(103,103,103)
+		ButtonAutoTeleportUpSmallHealth.TextStrokeTransparency = 0
+		ButtonAutoTeleportUpSmallHealth.TextColor3 = Color3.fromRGB(255, 255, 255)
+		ButtonAutoTeleportUpSmallHealth.TextScaled = true
+		ButtonAutoTeleportUpSmallHealth.BorderSizePixel = 3
+
+		ButtonAutoTeleportUpSmallHealth.Text = TextToAutoSmallHealth .. tostring(IsAutoTeleportUpSmallHealth)
+		
 		
 		
 		
@@ -238,23 +258,32 @@ local function AddedUI()
 		
 		
 		
-		local UIARCMainOptionsButtonHideNick = Instance.new("UIAspectRatioConstraint")
+		local UIARCMainOptionsButtonEspPlayers = Instance.new("UIAspectRatioConstraint")
 
-		UIARCMainOptionsButtonHideNick.AspectType = Enum.AspectType.FitWithinMaxSize
-		UIARCMainOptionsButtonHideNick.DominantAxis = Enum.DominantAxis.Width
-		UIARCMainOptionsButtonHideNick.AspectRatio = 0.986
+		UIARCMainOptionsButtonEspPlayers.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARCMainOptionsButtonEspPlayers.DominantAxis = Enum.DominantAxis.Width
+		UIARCMainOptionsButtonEspPlayers.AspectRatio = 0.986
 
-		UIARCMainOptionsButtonHideNick.Parent = ButtonEspPlayer
+		UIARCMainOptionsButtonEspPlayers.Parent = ButtonEspPlayer
 		
 		
 		
-		local UIARCMainOptionsButtonHidePlayer = Instance.new("UIAspectRatioConstraint")
+		local UIARCMainOptionsButtonPlayerAnchored = Instance.new("UIAspectRatioConstraint")
 
-		UIARCMainOptionsButtonHidePlayer.AspectType = Enum.AspectType.FitWithinMaxSize
-		UIARCMainOptionsButtonHidePlayer.DominantAxis = Enum.DominantAxis.Width
-		UIARCMainOptionsButtonHidePlayer.AspectRatio = 0.986
+		UIARCMainOptionsButtonPlayerAnchored.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARCMainOptionsButtonPlayerAnchored.DominantAxis = Enum.DominantAxis.Width
+		UIARCMainOptionsButtonPlayerAnchored.AspectRatio = 0.986
 
-		UIARCMainOptionsButtonHidePlayer.Parent = ButtonHidePlayer
+		UIARCMainOptionsButtonPlayerAnchored.Parent = ButtonPlayerAnchored
+		
+		
+		local UIARCMainOptionsButtonAutoTeleportUpSmallHealth = Instance.new("UIAspectRatioConstraint")
+
+		UIARCMainOptionsButtonAutoTeleportUpSmallHealth.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARCMainOptionsButtonAutoTeleportUpSmallHealth.DominantAxis = Enum.DominantAxis.Width
+		UIARCMainOptionsButtonAutoTeleportUpSmallHealth.AspectRatio = 0.986
+
+		UIARCMainOptionsButtonAutoTeleportUpSmallHealth.Parent = ButtonAutoTeleportUpSmallHealth
 		
 		
 
@@ -347,6 +376,42 @@ local function AddedUI()
 			end
 		end)
 		
+		
+		ButtonPlayerAnchored.MouseButton1Click:Connect(function()
+			Player = Players.LocalPlayer
+			Hrp = Player.Character:WaitForChild("HumanoidRootPart")
+			
+			if not IsPlayerAnchored and Hrp then
+				IsPlayerAnchored = true
+				
+				ButtonPlayerAnchored.Text = "Player Anchored: " .. tostring(IsPlayerAnchored)
+				
+				Hrp.Anchored = true
+			elseif IsPlayerAnchored and Hrp then
+				IsPlayerAnchored = false
+				
+				Hrp.Anchored = false
+				
+				ButtonPlayerAnchored.Text = "Player Anchored: " .. tostring(IsPlayerAnchored)
+			end
+		end)
+		
+		
+		ButtonAutoTeleportUpSmallHealth.MouseButton1Click:Connect(function()
+			IsAutoTeleportUpSmallHealth = not IsAutoTeleportUpSmallHealth
+			ButtonAutoTeleportUpSmallHealth.Text = TextToAutoSmallHealth .. tostring(IsAutoTeleportUpSmallHealth)
+			
+			if IsAutoTeleportUpSmallHealth and Humanoid then
+				Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+					if Humanoid.Health <= Minimum_Health_TeleportUp and IsAutoTeleportUpSmallHealth then
+						Hrp.CFrame = Hrp.CFrame * CFrame.new(0,TeleportUpNumber,0)
+						IsAutoTeleportUpSmallHealth = false
+						ButtonAutoTeleportUpSmallHealth.Text = TextToAutoSmallHealth .. tostring(IsAutoTeleportUpSmallHealth)
+					end
+				end)
+			end
+		end)
+		
 
 
 		ButtonFly.Parent = ScreenGui
@@ -356,7 +421,8 @@ local function AddedUI()
 		ButtonMoreOptions.Parent = ScreenGui
 		
 		ButtonEspPlayer.Parent = MainOptions
-		ButtonHidePlayer.Parent = MainOptions
+		ButtonPlayerAnchored.Parent = MainOptions
+		ButtonAutoTeleportUpSmallHealth.Parent = MainOptions
 	else 
 		warn("Player is not in the game")
 	end
@@ -378,5 +444,24 @@ RunService.RenderStepped:Connect(function()
 		local Hrp:BasePart = Character:FindFirstChild("HumanoidRootPart")
 		
 		PartFly.CFrame = Hrp.CFrame * CFrame.new(0,-3,0)
+	end
+	
+	if IsEspPlayer then
+		for i,v in pairs(Players:GetPlayers()) do
+			local Otherchar = v.Character
+			local OtherHrp = Otherchar:FindFirstChild("HumanoidRootPart")
+			
+			local FindHightLight = Otherchar:FindFirstChild("EspHightLight")
+			
+			if not FindHightLight and Otherchar.Name ~= Player.Character.Name then
+				local HightLight = Instance.new("Highlight")
+				HightLight.Name = "EspHightLight"
+				HightLight.OutlineColor = Color3.fromRGB(255, 0, 4)
+				HightLight.FillTransparency = 0.5
+				HightLight.FillColor = Color3.fromRGB(255, 0, 4)
+
+				HightLight.Parent = Otherchar
+			end
+		end
 	end
 end)
