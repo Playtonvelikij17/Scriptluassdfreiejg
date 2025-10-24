@@ -30,7 +30,9 @@ local PositionHomes = {
 	Vector3.new(-414,26,117),
 	Vector3.new(325,26,486),
 	Vector3.new(-354,26,473),
-	Vector3.new(-326,26,-237)
+	Vector3.new(-326,26,-237),
+	Vector3.new(-355,26,472),
+	Vector3.new(-359,26,81),
 }
 
 
