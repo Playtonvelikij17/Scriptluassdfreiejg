@@ -251,7 +251,7 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 				end)
 			end)
 			
-			wait(45)
+			wait(50)
 		end
 	end)
 end)
