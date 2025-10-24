@@ -1,10 +1,13 @@
 local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 
 local LocalPlayer = nil
 local Character = nil
 local Humanoid:Humanoid = nil
 local Hrp:BasePart = nil
+
+local SecondTween = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
 
 local Is_Fly = false
 local Is_Auto_Halloween = false
@@ -163,8 +166,10 @@ ButtonAutoBuildABoatHalloween.MouseButton1Click:Connect(function()
 			Hrp = Character:WaitForChild("HumanoidRootPart")
 			
 			local RandomIndex = math.random(1, #PositionHomes)
-			Hrp.CFrame = CFrame.new(PositionHomes[RandomIndex])
-			wait(1)
+			local Tween = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(PositionHomes[RandomIndex])})
+			Tween:Play()
+			
+			wait(2)
 		end
 	end)
 end)
