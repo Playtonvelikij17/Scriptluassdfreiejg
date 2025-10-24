@@ -11,9 +11,11 @@ local SecondTween = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirec
 
 local Is_Fly = false
 local Is_Auto_Halloween = false
+local Is_Auto_Gold = false
 
 local SpeedPlayer = 30
 local Delay_Start = 3
+local Delay_Tween = 0.6
 
 local PositionHomes = {
 	Vector3.new(-255, 26, -291),
@@ -80,8 +82,6 @@ UIRatioCButtonIsFly.AspectType = Enum.AspectType.FitWithinMaxSize
 UIRatioCButtonIsFly.DominantAxis = Enum.DominantAxis.Width
 UIRatioCButtonIsFly.Parent = ButtonIsFly
 
-ButtonIsFly.Parent = ScreenUI
-
 
 local ButtonSpeed = Instance.new("TextBox")
 ButtonSpeed.Size = UDim2.new(0.061, 0,0.116, 0)
@@ -130,8 +130,33 @@ UIRatioCButtonAutoBuildABoatHalloween.AspectType = Enum.AspectType.FitWithinMaxS
 UIRatioCButtonAutoBuildABoatHalloween.DominantAxis = Enum.DominantAxis.Width
 UIRatioCButtonAutoBuildABoatHalloween.Parent = ButtonAutoBuildABoatHalloween
 
+
+local ButtonAutoBuildABoatGold = Instance.new("TextButton")
+ButtonAutoBuildABoatGold.Size = UDim2.new(0.061, 0,0.116, 0)
+ButtonAutoBuildABoatGold.Position = UDim2.new(0.074, 0,0.08, 0)
+
+ButtonAutoBuildABoatGold.BackgroundColor3 = Color3.fromRGB(57, 146, 255)
+ButtonAutoBuildABoatGold.BorderColor3 = Color3.fromRGB(44, 118, 202)
+ButtonAutoBuildABoatGold.BorderSizePixel = 3
+
+ButtonAutoBuildABoatGold.TextColor3 = Color3.fromRGB(255, 255, 255)
+ButtonAutoBuildABoatGold.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+ButtonAutoBuildABoatGold.TextStrokeTransparency = 0
+
+ButtonAutoBuildABoatGold.TextScaled = true
+
+ButtonAutoBuildABoatGold.Text = "Auto Collect Gold: " .. tostring(Is_Auto_Gold)
+
+local UIRatioCButtonAutoBuildABoatGold = Instance.new("UIAspectRatioConstraint")
+UIRatioCButtonAutoBuildABoatGold.AspectRatio = 1.025
+UIRatioCButtonAutoBuildABoatGold.AspectType = Enum.AspectType.FitWithinMaxSize
+UIRatioCButtonAutoBuildABoatGold.DominantAxis = Enum.DominantAxis.Width
+UIRatioCButtonAutoBuildABoatGold.Parent = ButtonAutoBuildABoatGold
+
 ButtonIsFly.Parent = ScreenUI
 ButtonSpeed.Parent = ScreenUI
+ButtonAutoBuildABoatGold.Parent = ScreenUI
 ButtonAutoBuildABoatHalloween.Parent = ScreenUI
 
 ButtonIsFly.MouseButton1Click:Connect(function()
@@ -178,6 +203,74 @@ ButtonAutoBuildABoatHalloween.MouseButton1Click:Connect(function()
 			Tween:Play()
 			
 			wait(2)
+		end
+	end)
+end)
+
+ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
+	Is_Auto_Gold = not Is_Auto_Gold
+	ButtonAutoBuildABoatGold.Text = "Auto Collect Gold: " .. tostring(Is_Auto_Gold)
+	
+	task.spawn(function()
+		while Is_Auto_Gold do
+			if not Is_Auto_Gold then
+				break
+			end
+			
+			local TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-51,32,1396))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+			
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-36,25,2168))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+			
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-64, 39,2937))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-24,72,3718))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-38,62,4510))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-35,41,5277))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-54,34,6021))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-40,22,6801))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-24,72,3718))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-48,40,7616))})
+			TweenGold:Play()
+			
+			task.wait(Delay_Tween)
+
+			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-53,-358,9490))})
+			TweenGold:Play()
+			
+			task.wait(13)
 		end
 	end)
 end)
