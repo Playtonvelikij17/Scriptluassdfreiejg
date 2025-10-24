@@ -24,6 +24,10 @@ local PositionHomes = {
 	Vector3.new(-237,24,-359),
 	Vector3.new(164,26,-290),
 	Vector3.new(292,25,-230),
+	Vector3.new(-414,26,117),
+	Vector3.new(325,26,486),
+	Vector3.new(-354,26,473),
+	Vector3.new(-326,26,-237)
 }
 
 
@@ -141,8 +145,8 @@ ButtonSpeed.FocusLost:Connect(function(EnterPressed)
 	Humanoid = Character:WaitForChild("Humanoid")
 
 	if Humanoid and EnterPressed then
-		SpeedPlayer = tonumber(ButtonSpeed.Text) or SpeedPlayer
-		Humanoid.WalkSpeed = SpeedPlayer
+		SpeedPlayer = tonumber(ButtonSpeed.Text)
+		Humanoid.WalkSpeed = SpeedPlayer or 60
 	end
 end)
 
@@ -176,5 +180,7 @@ RunService.RenderStepped:Connect(function()
 		PartFly.CFrame = Hrp.CFrame * CFrame.new(0,-3,0)
 	end
 	
-	Humanoid.WalkSpeed = SpeedPlayer
+	if Humanoid then
+		Humanoid.WalkSpeed = SpeedPlayer or 60
+	end
 end)
