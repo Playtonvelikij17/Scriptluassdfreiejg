@@ -33,6 +33,12 @@ local PositionHomes = {
 	Vector3.new(-326,26,-237),
 	Vector3.new(-355,26,472),
 	Vector3.new(-359,26,81),
+	Vector3.new(283,26,451),
+	Vector3.new(193,26,99),
+	Vector3.new(350,26,123),
+	Vector3.new(-358,26,82),
+	Vector3.new(-297,26,439),
+	Vector3.new(-313,26,797),
 }
 
 
