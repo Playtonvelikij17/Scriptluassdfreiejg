@@ -21,6 +21,9 @@ local PositionHomes = {
 	Vector3.new(216,26,483),
 	Vector3.new(280,26,453),
 	Vector3.new(253,26,142),
+	Vector3.new(-237,24,-359),
+	Vector3.new(164,26,-290),
+	Vector3.new(292,25,-230),
 }
 
 
@@ -91,7 +94,7 @@ UIRatioCButtonSpeed.Parent = ButtonSpeed
 
 local ButtonAutoBuildABoatHalloween = Instance.new("TextButton")
 ButtonAutoBuildABoatHalloween.Size = UDim2.new(0.061, 0,0.116, 0)
-ButtonAutoBuildABoatHalloween.Position = UDim2.new(0.074, 0,0.36, 0)
+ButtonAutoBuildABoatHalloween.Position = UDim2.new(0.074, 0,0.217, 0)
 
 ButtonAutoBuildABoatHalloween.BackgroundColor3 = Color3.fromRGB(57, 146, 255)
 ButtonAutoBuildABoatHalloween.BorderColor3 = Color3.fromRGB(44, 118, 202)
