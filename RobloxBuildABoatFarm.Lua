@@ -141,7 +141,8 @@ ButtonSpeed.FocusLost:Connect(function(EnterPressed)
 	Humanoid = Character:WaitForChild("Humanoid")
 
 	if Humanoid and EnterPressed then
-		Humanoid.WalkSpeed = tonumber(ButtonSpeed.Text) or SpeedPlayer
+		SpeedPlayer = tonumber(ButtonSpeed.Text) or SpeedPlayer
+		Humanoid.WalkSpeed = SpeedPlayer
 	end
 end)
 
@@ -174,4 +175,6 @@ RunService.RenderStepped:Connect(function()
 	if Is_Fly and PartFly then
 		PartFly.CFrame = Hrp.CFrame * CFrame.new(0,-3,0)
 	end
+	
+	Humanoid.WalkSpeed = SpeedPlayer
 end)
