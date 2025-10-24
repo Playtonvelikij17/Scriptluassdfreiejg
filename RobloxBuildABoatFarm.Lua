@@ -163,7 +163,7 @@ ButtonAutoBuildABoatHalloween.Parent = ScreenUI
 ButtonIsFly.MouseButton1Click:Connect(function()
 	Is_Fly = not Is_Fly
 	ButtonIsFly.Text = "Fly: " .. tostring(Is_Fly)
-	
+
 	if Is_Fly then
 		PartFly = Instance.new("Part")
 		PartFly.Size = Vector3.new(5, 0.4, 5)
@@ -190,19 +190,19 @@ end)
 ButtonAutoBuildABoatHalloween.MouseButton1Click:Connect(function()
 	Is_Auto_Halloween = not Is_Auto_Halloween
 	ButtonAutoBuildABoatHalloween.Text = "Auto Collect Home: " .. tostring(Is_Auto_Halloween)
-	
+
 	task.spawn(function()
 		while Is_Auto_Halloween do
 			if not Is_Auto_Halloween then
 				break
 			end
-			
+
 			Hrp = Character:WaitForChild("HumanoidRootPart")
-			
+
 			local RandomIndex = math.random(1, #PositionHomes)
 			local Tween = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(PositionHomes[RandomIndex])})
 			Tween:Play()
-			
+
 			wait(2)
 		end
 	end)
@@ -211,32 +211,32 @@ end)
 ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 	Is_Auto_Gold = not Is_Auto_Gold
 	ButtonAutoBuildABoatGold.Text = "Auto Collect Gold: " .. tostring(Is_Auto_Gold)
-	
+
 	task.spawn(function()
 		while Is_Auto_Gold do
 			if not Is_Auto_Gold then
 				break
 			end
-			
+
 			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-69,34,526))})
 			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-37,71,7820))})
-			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
-			TweenGold:Play()
 
-			task.wait(Delay_Tween)
-			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-53,-361,9490))})
-			TweenGold:Play()
+			TweenGold.Completed:Connect(function()
+				TweenGold = TweenService:Create(Hrp, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-37,71,7820))})
+				TweenGold:Play()
 
-			task.wait(23)
+				TweenGold.Completed:Connect(function()
+					TweenGold = TweenService:Create(Hrp, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
+					TweenGold:Play()
+
+					TweenGold.Completed:Connect(function()
+						TweenGold = TweenService:Create(Hrp, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-53,-361,9490))})
+						TweenGold:Play()
+					end)
+				end)
+			end)
+			
+			wait(30)
 		end
 	end)
 end)
@@ -247,12 +247,8 @@ RunService.RenderStepped:Connect(function()
 	Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 	Humanoid = Character:FindFirstChild("Humanoid")
 	Hrp = Character:FindFirstChild("HumanoidRootPart")
-	
+
 	if Is_Fly and PartFly then
 		PartFly.CFrame = Hrp.CFrame * CFrame.new(0,-3,0)
-	end
-	
-	if Humanoid then
-		Humanoid.WalkSpeed = SpeedPlayer or 60
 	end
 end)
