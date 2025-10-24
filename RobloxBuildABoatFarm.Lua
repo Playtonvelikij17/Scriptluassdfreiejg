@@ -218,22 +218,22 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 				break
 			end
 			
-			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-44,15,672))})
+			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-69,34,526))})
 			TweenGold:Play()
 			
 			task.wait(Delay_Tween)
 			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-66,40,7802))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-37,71,7820))})
 			TweenGold:Play()
 			
 			task.wait(Delay_Tween)
 			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-57,41,8658))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
 			TweenGold:Play()
 
 			task.wait(Delay_Tween)
 			
-			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-53,361,9490))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-53,-361,9490))})
 			TweenGold:Play()
 
 			task.wait(23)
