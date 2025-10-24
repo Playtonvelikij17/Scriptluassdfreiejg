@@ -226,7 +226,7 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 				TweenGold:Play()
 
 				TweenGold.Completed:Connect(function()
-					TweenGold = TweenService:Create(Hrp, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
+					TweenGold = TweenService:Create(Hrp, TweenInfo.new(6, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
 					TweenGold:Play()
 
 					TweenGold.Completed:Connect(function()
