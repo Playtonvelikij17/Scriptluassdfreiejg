@@ -218,25 +218,40 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 				break
 			end
 
-			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-69,34,526))})
+			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-47,38,405))})
 			TweenGold:Play()
 
 			TweenGold.Completed:Connect(function()
-				TweenGold = TweenService:Create(Hrp, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-37,71,7820))})
+				TweenGold = TweenService:Create(Hrp, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+					, {CFrame = CFrame.new(Vector3.new(-72,73,7590))})
 				TweenGold:Play()
 
 				TweenGold.Completed:Connect(function()
-					TweenGold = TweenService:Create(Hrp, TweenInfo.new(6, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-59,66,8745))})
+					TweenGold = TweenService:Create(Hrp, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+						, {CFrame = CFrame.new(Vector3.new(-40,259,7901))})
 					TweenGold:Play()
 
 					TweenGold.Completed:Connect(function()
-						TweenGold = TweenService:Create(Hrp, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {CFrame = CFrame.new(Vector3.new(-53,-361,9490))})
+						TweenGold = TweenService:Create(Hrp, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+							, {CFrame = CFrame.new(Vector3.new(-41,59,8359))})
 						TweenGold:Play()
+						
+						TweenGold.Completed:Connect(function()
+							TweenGold = TweenService:Create(Hrp, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+								, {CFrame = CFrame.new(Vector3.new(-36,88,8744))})
+							TweenGold:Play()
+							
+							TweenGold.Completed:Connect(function()
+								TweenGold = TweenService:Create(Hrp, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+									, {CFrame = CFrame.new(Vector3.new(-63,-361,9490))})
+								TweenGold:Play()
+							end)
+						end)
 					end)
 				end)
 			end)
 			
-			wait(30)
+			wait(45)
 		end
 	end)
 end)
