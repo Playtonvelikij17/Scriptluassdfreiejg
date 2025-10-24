@@ -8,14 +8,14 @@ local Humanoid:Humanoid = nil
 local Hrp:BasePart = nil
 
 local SecondTween = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-
+local SecondTweenGold = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
 local Is_Fly = false
 local Is_Auto_Halloween = false
 local Is_Auto_Gold = false
 
 local SpeedPlayer = 30
 local Delay_Start = 3
-local Delay_Tween = 0.6
+local Delay_Tween = 4.01
 
 local PositionHomes = {
 	Vector3.new(-255, 26, -291),
@@ -52,6 +52,7 @@ LocalPlayer = Players.LocalPlayer
 task.wait(Delay_Start)
 
 if not LocalPlayer then return end
+
 
 local ScreenUI = Instance.new("ScreenGui")
 ScreenUI.ResetOnSpawn = false
@@ -217,59 +218,24 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 				break
 			end
 			
-			local TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-51,32,1396))})
+			local TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-44,15,672))})
 			TweenGold:Play()
 			
 			task.wait(Delay_Tween)
 			
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-36,25,2168))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-66,40,7802))})
 			TweenGold:Play()
 			
 			task.wait(Delay_Tween)
 			
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-64, 39,2937))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-57,41,8658))})
 			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
 
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-24,72,3718))})
-			TweenGold:Play()
-			
 			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-38,62,4510))})
-			TweenGold:Play()
 			
-			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-35,41,5277))})
+			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-53,361,9490))})
 			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
 
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-54,34,6021))})
-			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-40,22,6801))})
-			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-24,72,3718))})
-			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-48,40,7616))})
-			TweenGold:Play()
-			
-			task.wait(Delay_Tween)
-
-			TweenGold = TweenService:Create(Hrp, SecondTween, {CFrame = CFrame.new(Vector3.new(-53,-358,9490))})
-			TweenGold:Play()
-			
 			task.wait(13)
 		end
 	end)
