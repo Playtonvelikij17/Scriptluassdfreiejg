@@ -236,7 +236,7 @@ ButtonAutoBuildABoatGold.MouseButton1Click:Connect(function()
 			TweenGold = TweenService:Create(Hrp, SecondTweenGold, {CFrame = CFrame.new(Vector3.new(-53,361,9490))})
 			TweenGold:Play()
 
-			task.wait(20)
+			task.wait(23)
 		end
 	end)
 end)
