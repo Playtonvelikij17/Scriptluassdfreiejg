@@ -15,32 +15,30 @@ local Is_Auto_Gold = false
 
 local SpeedPlayer = 30
 local Delay_Start = 3
-local Delay_Tween = 4.01
 
 local PositionHomes = {
-	Vector3.new(-255, 26, -291),
-	Vector3.new(-313,26,124),
-	Vector3.new(-361, 26,81),
-	Vector3.new(183,26,825),
-	Vector3.new(273,26,794),
-	Vector3.new(216,26,483),
-	Vector3.new(280,26,453),
-	Vector3.new(253,26,142),
-	Vector3.new(-237,24,-359),
-	Vector3.new(164,26,-290),
-	Vector3.new(292,25,-230),
-	Vector3.new(-414,26,117),
-	Vector3.new(325,26,486),
-	Vector3.new(-354,26,473),
-	Vector3.new(-326,26,-237),
+	-- 1
+	Vector3.new(-255,26,-295),
+	Vector3.new(162,26,-289),
+	Vector3.new(108,26,-344),
+	Vector3.new(234,24,-359),
+	Vector3.new(296,25,-230),
+	
+	--  2
+	
+	Vector3.new(352,26,120),
+	Vector3.new(-311,26,120),
+	Vector3.new(-410,26,117),
+	Vector3.new(-362,26,82),
+	
+	-- 3
+	Vector3.new(-436,26,436),
 	Vector3.new(-355,26,472),
-	Vector3.new(-359,26,81),
-	Vector3.new(283,26,451),
-	Vector3.new(193,26,99),
-	Vector3.new(350,26,123),
-	Vector3.new(-358,26,82),
-	Vector3.new(-297,26,439),
-	Vector3.new(-313,26,797),
+	Vector3.new(214,26,487),
+	Vector3.new(325,26,486),
+	
+	-- 4
+	Vector3.new(-312,26,798),
 }
 
 
