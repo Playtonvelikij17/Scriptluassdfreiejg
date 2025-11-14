@@ -636,7 +636,10 @@ RunService.RenderStepped:Connect(function()
 		if not Is_Esp_Player then
 			for i,v in ipairs(Players:GetPlayers()) do
 				if v ~= LocalPlayer then
-					local CharOther = v.Character
+					local CharOther = v.Character or v.CharacterAdded:Wait()
+					
+					if not CharOther then return end
+					
 					local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 
 					if CharOther and Find_HightLight then
