@@ -18,6 +18,8 @@ local Is_Player_Speed = false
 local Delay_Start_Script = 2
 local Default_Speed_Player = 16
 
+local Speed_Player = 35
+
 local Current_Device = ""
 
 while task.wait() do
@@ -193,12 +195,17 @@ if Main_ButtonSpeed_ScrollFrame then -- settings button
 	Button_TurnSpeed_Main_ButtonSpeed.MouseButton1Click:Connect(function()
 		Is_Player_Speed = not Is_Player_Speed
 		
+	--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
+		
 		if Is_Player_Speed then
-			Humanoid.WalkSpeed = tonumber(TextBox_HowManySpeed_Main_ButtonSpeed.Text) or 0
+			Speed_Player = TextBox_HowManySpeed_Main_ButtonSpeed.Text
 			
-			TextBox_HowManySpeed_Main_ButtonSpeed.Text = tostring(Humanoid.WalkSpeed)
-		else 
-			Humanoid.WalkSpeed = Default_Speed_Player
+			TextBox_HowManySpeed_Main_ButtonSpeed.Text = tostring(Speed_Player)
+		else
+			if not Is_Player_Speed then
+				Speed_Player = 16
+			--	print("Speed_Player = 16!")
+			end
 		end
 		Button_TurnSpeed_Main_ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
 	end)
@@ -238,11 +245,14 @@ if Main_ButtonSpeed_ScrollFrame then -- settings button
 	
 	TextBox_HowManySpeed_Main_ButtonSpeed.FocusLost:Connect(function(EnterPressed)
 		if EnterPressed and Is_Player_Speed then
-			Humanoid.WalkSpeed = tonumber(TextBox_HowManySpeed_Main_ButtonSpeed.Text) or 0
 			
-			TextBox_HowManySpeed_Main_ButtonSpeed.Text = tostring(Humanoid.WalkSpeed)
+			Speed_Player = TextBox_HowManySpeed_Main_ButtonSpeed.Text
 			
-			print(Humanoid.WalkSpeed)
+			Humanoid.WalkSpeed = tonumber(Speed_Player) or 0
+			
+			TextBox_HowManySpeed_Main_ButtonSpeed.Text = tostring(Speed_Player)
+			
+		--	print("Speed Hum: " .. Humanoid.WalkSpeed .. " Speed_Player: " .. Speed_Player)
 		end
 	end)
 end
@@ -292,6 +302,12 @@ RunService.RenderStepped:Connect(function()
 	Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 	Humanoid = Character:WaitForChild("Humanoid")
 	Hrp = Character:WaitForChild("HumanoidRootPart")
+	
+	if Is_Player_Speed then
+		Humanoid.WalkSpeed = Speed_Player
+	else
+		Humanoid.WalkSpeed = Default_Speed_Player
+	end
 	
 	if IsDrag and Current_Device == "PC" then
 		local MousePos = UserInputService:GetMouseLocation()
