@@ -15,6 +15,7 @@ local IsDragMobile = false
 
 local Is_Player_Speed = false
 local Is_Player_Fly = false
+local Is_Esp_Player = false
 
 local Delay_Start_Script = 2
 local Default_Speed_Player = 16
@@ -159,7 +160,7 @@ Main_ButtonSpeed_ScrollFrame.BorderSizePixel = 0
 Main_ButtonSpeed_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonSpeed_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonSpeed_ScrollFrame.Position = UDim2.new(0.099, 0,0.023, 0)
+Main_ButtonSpeed_ScrollFrame.Position = UDim2.new(0.099, 0,0.28, 0)
 
 Main_ButtonSpeed_ScrollFrame.Parent = ScrollFrame
 
@@ -265,7 +266,7 @@ Main_ButtonFly_ScrollFrame.BorderSizePixel = 0
 Main_ButtonFly_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonFly_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonFly_ScrollFrame.Position = UDim2.new(0.099, 0,0.15, 0)
+Main_ButtonFly_ScrollFrame.Position = UDim2.new(0.099, 0,0.023, 0)
 
 Main_ButtonFly_ScrollFrame.Parent = ScrollFrame
 
@@ -326,7 +327,62 @@ if Main_ButtonFly_ScrollFrame then -- settings button
 	UIARC_Main_ButtonFly.Parent = Button_Fly_Main_ButtonFly
 end
 
+local Main_ButtonEspPlayer_ScrollFrame = Instance.new("Frame")
 
+Main_ButtonEspPlayer_ScrollFrame.BorderSizePixel = 0
+Main_ButtonEspPlayer_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+Main_ButtonEspPlayer_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
+Main_ButtonEspPlayer_ScrollFrame.Position = UDim2.new(0.099, 0,0.15, 0)
+
+Main_ButtonEspPlayer_ScrollFrame.Parent = ScrollFrame
+
+local Button_EspPlayer_Main_ButtonEspPlayer:TextButton = nil
+
+if Main_ButtonEspPlayer_ScrollFrame then -- settings button
+
+	local UIARC_Main_ButtonEspPlayer = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonEspPlayer.AspectRatio = 3.27
+	UIARC_Main_ButtonEspPlayer.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonEspPlayer.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonEspPlayer.Parent = Main_ButtonEspPlayer_ScrollFrame
+
+	Button_EspPlayer_Main_ButtonEspPlayer = Instance.new("TextButton")
+
+	Button_EspPlayer_Main_ButtonEspPlayer.Size = UDim2.new(0.453, 0,0.7, 0)
+	Button_EspPlayer_Main_ButtonEspPlayer.Position = UDim2.new(0.271, 0,0.139, 0)
+
+	Button_EspPlayer_Main_ButtonEspPlayer.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	Button_EspPlayer_Main_ButtonEspPlayer.BorderSizePixel = 0
+
+	Button_EspPlayer_Main_ButtonEspPlayer.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_EspPlayer_Main_ButtonEspPlayer.FontFace.Bold = true
+	Button_EspPlayer_Main_ButtonEspPlayer.TextScaled = true
+
+	Button_EspPlayer_Main_ButtonEspPlayer.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_EspPlayer_Main_ButtonEspPlayer.TextStrokeTransparency = 0
+	Button_EspPlayer_Main_ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
+
+	Button_EspPlayer_Main_ButtonEspPlayer.Parent = Main_ButtonEspPlayer_ScrollFrame
+
+	Button_EspPlayer_Main_ButtonEspPlayer.MouseButton1Click:Connect(function()
+		Is_Esp_Player = not Is_Esp_Player
+
+		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
+		
+		Button_EspPlayer_Main_ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
+		
+		print(Is_Esp_Player)
+	end)
+
+	local UIARC_Main_ButtonFly = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonFly.AspectRatio = 2.114
+	UIARC_Main_ButtonFly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonFly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonFly.Parent = Button_Fly_Main_ButtonFly
+end
 
 local Main_ButtonTeleportUp_ScrollFrame = Instance.new("Frame")
 
@@ -334,7 +390,7 @@ Main_ButtonTeleportUp_ScrollFrame.BorderSizePixel = 0
 Main_ButtonTeleportUp_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonTeleportUp_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonTeleportUp_ScrollFrame.Position = UDim2.new(0.099, 0,0.28, 0)
+Main_ButtonTeleportUp_ScrollFrame.Position = UDim2.new(0.099, 0,0.405, 0)
 
 Main_ButtonTeleportUp_ScrollFrame.Parent = ScrollFrame
 
@@ -425,7 +481,7 @@ Main_ButtonTeleportDirectly_ScrollFrame.BorderSizePixel = 0
 Main_ButtonTeleportDirectly_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonTeleportDirectly_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonTeleportDirectly_ScrollFrame.Position = UDim2.new(0.099, 0,0.405, 0)
+Main_ButtonTeleportDirectly_ScrollFrame.Position = UDim2.new(0.099, 0,0.535, 0)
 
 Main_ButtonTeleportDirectly_ScrollFrame.Parent = ScrollFrame
 
@@ -553,6 +609,41 @@ RunService.RenderStepped:Connect(function()
 	Hrp = Character:WaitForChild("HumanoidRootPart")
 	
 	if not Hrp then return end
+	
+	if Is_Esp_Player then
+		for i,v in ipairs(Players:GetPlayers()) do
+			if v ~= LocalPlayer then
+				local CharOther = v.Character
+				local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
+				
+				if CharOther and not Find_HightLight then
+					local HightLight = Instance.new("Highlight")
+					HightLight.Name = "HightLightHacks"
+					HightLight.FillTransparency = 0.5
+					HightLight.Enabled = true
+					HightLight.FillColor = Color3.fromRGB(255, 0, 4)
+					HightLight.OutlineTransparency = 0
+					HightLight.OutlineColor = Color3.fromRGB(255, 0, 4)
+					HightLight.Parent = CharOther
+			--		print("Added to: " .. v.Name)
+				end
+			end
+		end
+	else 
+		if not Is_Esp_Player then
+			for i,v in ipairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					local CharOther = v.Character
+					local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
+
+					if CharOther and Find_HightLight then
+						Find_HightLight:Destroy()
+				--		print("Deleted to: " .. v.Name)
+					end
+				end
+			end
+		end
+	end
 	
 	if Is_Player_Speed then
 		Humanoid.WalkSpeed = Speed_Player
