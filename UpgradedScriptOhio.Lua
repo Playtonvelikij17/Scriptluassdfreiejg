@@ -755,10 +755,6 @@ RunService.RenderStepped:Connect(function()
 		end
 	end
 	
-	if Is_Player_Fly then
-		Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
-	end
-	
 	if IsDrag and Current_Device == "PC" then
 		local MousePos = UserInputService:GetMouseLocation()
 	--	print(MousePos.X .. " " .. MousePos.Y)
@@ -773,4 +769,14 @@ RunService.RenderStepped:Connect(function()
 		end
 	end
 end)
--- Credit: delovoi_chelovek007, my Discord: serpol39
+
+
+task.spawn(function()
+	while task.wait() do
+		if Is_Player_Fly then
+			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
+		end
+	end
+end)
+
+-- credit delovoi_chelovek007 11
