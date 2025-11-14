@@ -14,13 +14,18 @@ local IsDrag = false
 local IsDragMobile = false
 
 local Is_Player_Speed = false
+local Is_Player_Fly = false
 
 local Delay_Start_Script = 2
 local Default_Speed_Player = 16
-
 local Speed_Player = 35
 
+local HowMany_TeleportUp = 16
+local HowMany_TeleportDirectly = 16
+
 local Current_Device = ""
+
+local Part_Fly:BasePart = nil
 
 while task.wait() do
 	if LocalPlayer then
@@ -163,9 +168,6 @@ local TextBox_HowManySpeed_Main_ButtonSpeed:TextBox = nil
 
 if Main_ButtonSpeed_ScrollFrame then -- settings button
 	
-	local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-	local Humanoid:Humanoid = Character:WaitForChild("Humanoid")
-	
 	local UIARC_Main_ButtonSpeed = Instance.new("UIAspectRatioConstraint")
 	UIARC_Main_ButtonSpeed.AspectRatio = 3.27
 	UIARC_Main_ButtonSpeed.AspectType = Enum.AspectType.FitWithinMaxSize
@@ -257,8 +259,255 @@ if Main_ButtonSpeed_ScrollFrame then -- settings button
 	end)
 end
 
+local Main_ButtonFly_ScrollFrame = Instance.new("Frame")
+
+Main_ButtonFly_ScrollFrame.BorderSizePixel = 0
+Main_ButtonFly_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+Main_ButtonFly_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
+Main_ButtonFly_ScrollFrame.Position = UDim2.new(0.099, 0,0.15, 0)
+
+Main_ButtonFly_ScrollFrame.Parent = ScrollFrame
+
+local Button_Fly_Main_ButtonFly:TextButton = nil
+
+if Main_ButtonFly_ScrollFrame then -- settings button
+
+	local UIARC_Main_ButtonFly = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonFly.AspectRatio = 3.27
+	UIARC_Main_ButtonFly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonFly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonFly.Parent = Main_ButtonFly_ScrollFrame
+
+	Button_Fly_Main_ButtonFly = Instance.new("TextButton")
+
+	Button_Fly_Main_ButtonFly.Size = UDim2.new(0.453, 0,0.7, 0)
+	Button_Fly_Main_ButtonFly.Position = UDim2.new(0.271, 0,0.139, 0)
+
+	Button_Fly_Main_ButtonFly.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	Button_Fly_Main_ButtonFly.BorderSizePixel = 0
+
+	Button_Fly_Main_ButtonFly.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_Fly_Main_ButtonFly.FontFace.Bold = true
+	Button_Fly_Main_ButtonFly.TextScaled = true
+
+	Button_Fly_Main_ButtonFly.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_Fly_Main_ButtonFly.TextStrokeTransparency = 0
+	Button_Fly_Main_ButtonFly.Text = "Player Fly: " .. tostring(Is_Player_Fly)
+
+	Button_Fly_Main_ButtonFly.Parent = Main_ButtonFly_ScrollFrame
+
+	Button_Fly_Main_ButtonFly.MouseButton1Click:Connect(function()
+		Is_Player_Fly = not Is_Player_Fly
+
+		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
+
+		if Is_Player_Fly then
+			Part_Fly = Instance.new("Part")
+			Part_Fly.Size = Vector3.new(5, 0.6, 5)
+			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
+			Part_Fly.Transparency = 0.2
+			Part_Fly.Parent = workspace
+		else 
+			if Part_Fly then
+				Part_Fly:Destroy()
+				Part_Fly = nil
+			end
+		end
+		Button_Fly_Main_ButtonFly.Text = "Player Fly: " .. tostring(Is_Player_Fly)
+	end)
+	
+	local UIARC_Main_ButtonFly = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonFly.AspectRatio = 2.114
+	UIARC_Main_ButtonFly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonFly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonFly.Parent = Button_Fly_Main_ButtonFly
+end
 
 
+
+local Main_ButtonTeleportUp_ScrollFrame = Instance.new("Frame")
+
+Main_ButtonTeleportUp_ScrollFrame.BorderSizePixel = 0
+Main_ButtonTeleportUp_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+Main_ButtonTeleportUp_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
+Main_ButtonTeleportUp_ScrollFrame.Position = UDim2.new(0.099, 0,0.28, 0)
+
+Main_ButtonTeleportUp_ScrollFrame.Parent = ScrollFrame
+
+local Button_TeleportUp_Main_ButtonTeleportUp:TextButton = nil
+local TextBox_HowManyTeleportUp_Main_ButtonTeleportUp:TextBox = nil
+
+if Main_ButtonTeleportUp_ScrollFrame then -- settings button
+
+	local UIARC_Main_ButtonTeleportUp = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonTeleportUp.AspectRatio = 3.27
+	UIARC_Main_ButtonTeleportUp.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonTeleportUp.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonTeleportUp.Parent = Main_ButtonTeleportUp_ScrollFrame
+
+	Button_TeleportUp_Main_ButtonTeleportUp = Instance.new("TextButton")
+
+	Button_TeleportUp_Main_ButtonTeleportUp.Size = UDim2.new(0.22, 0,0.7, 0)
+	Button_TeleportUp_Main_ButtonTeleportUp.Position = UDim2.new(0.035, 0,0.152, 0)
+
+	Button_TeleportUp_Main_ButtonTeleportUp.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	Button_TeleportUp_Main_ButtonTeleportUp.BorderSizePixel = 0
+
+	Button_TeleportUp_Main_ButtonTeleportUp.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_TeleportUp_Main_ButtonTeleportUp.FontFace.Bold = true
+	Button_TeleportUp_Main_ButtonTeleportUp.TextScaled = true
+
+	Button_TeleportUp_Main_ButtonTeleportUp.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_TeleportUp_Main_ButtonTeleportUp.TextStrokeTransparency = 0
+	Button_TeleportUp_Main_ButtonTeleportUp.Text = "Teleport Up"
+
+	Button_TeleportUp_Main_ButtonTeleportUp.Parent = Main_ButtonTeleportUp_ScrollFrame
+
+	Button_TeleportUp_Main_ButtonTeleportUp.MouseButton1Click:Connect(function()
+		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,HowMany_TeleportUp,0)
+	end)
+	
+
+	local UIARC_Main_ButtonTeleportUp = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonTeleportUp.AspectRatio = 1.028
+	UIARC_Main_ButtonTeleportUp.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonTeleportUp.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonTeleportUp.Parent = Button_TeleportUp_Main_ButtonTeleportUp
+	
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp = Instance.new("TextBox")
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Size = UDim2.new(0.267, 0,0.548, 0)
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Position = UDim2.new(0.678, 0,0.228, 0)
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.BorderSizePixel = 0
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.FontFace.Bold = true
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.TextScaled = true
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.TextStrokeTransparency = 0
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Text = tostring(Humanoid.WalkSpeed)
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Parent = Main_ButtonTeleportUp_ScrollFrame
+
+	local UIARC_TextBox_HowManyTeleportUp = Instance.new("UIAspectRatioConstraint")
+	UIARC_TextBox_HowManyTeleportUp.AspectRatio = 1.59
+	UIARC_TextBox_HowManyTeleportUp.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_TextBox_HowManyTeleportUp.DominantAxis = Enum.DominantAxis.Width
+	UIARC_TextBox_HowManyTeleportUp.Parent = TextBox_HowManyTeleportUp_Main_ButtonTeleportUp
+
+
+	TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.FocusLost:Connect(function(EnterPressed)
+		if EnterPressed then
+			HowMany_TeleportUp = tonumber(TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Text) or 0
+			
+			TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Text = tostring(HowMany_TeleportUp)
+			
+			print(HowMany_TeleportUp)
+		end
+	end)
+end
+
+
+local Main_ButtonTeleportDirectly_ScrollFrame = Instance.new("Frame")
+
+Main_ButtonTeleportDirectly_ScrollFrame.BorderSizePixel = 0
+Main_ButtonTeleportDirectly_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+Main_ButtonTeleportDirectly_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
+Main_ButtonTeleportDirectly_ScrollFrame.Position = UDim2.new(0.099, 0,0.405, 0)
+
+Main_ButtonTeleportDirectly_ScrollFrame.Parent = ScrollFrame
+
+local Button_TeleportDirectly_Main_ButtonDirectly:TextButton = nil
+local TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly:TextBox = nil
+
+if Main_ButtonTeleportDirectly_ScrollFrame then -- settings button
+
+	local UIARC_Main_ButtonTeleportDirectly = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonTeleportDirectly.AspectRatio = 3.27
+	UIARC_Main_ButtonTeleportDirectly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonTeleportDirectly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonTeleportDirectly.Parent = Main_ButtonTeleportDirectly_ScrollFrame
+
+	Button_TeleportDirectly_Main_ButtonDirectly = Instance.new("TextButton")
+
+	Button_TeleportDirectly_Main_ButtonDirectly.Size = UDim2.new(0.22, 0,0.7, 0)
+	Button_TeleportDirectly_Main_ButtonDirectly.Position = UDim2.new(0.035, 0,0.152, 0)
+
+	Button_TeleportDirectly_Main_ButtonDirectly.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	Button_TeleportDirectly_Main_ButtonDirectly.BorderSizePixel = 0
+
+	Button_TeleportDirectly_Main_ButtonDirectly.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_TeleportDirectly_Main_ButtonDirectly.FontFace.Bold = true
+	Button_TeleportDirectly_Main_ButtonDirectly.TextScaled = true
+
+	Button_TeleportDirectly_Main_ButtonDirectly.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_TeleportDirectly_Main_ButtonDirectly.TextStrokeTransparency = 0
+	Button_TeleportDirectly_Main_ButtonDirectly.Text = "Teleport Directly"
+
+	Button_TeleportDirectly_Main_ButtonDirectly.Parent = Main_ButtonTeleportDirectly_ScrollFrame
+
+	Button_TeleportDirectly_Main_ButtonDirectly.MouseButton1Click:Connect(function()
+		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,0,-HowMany_TeleportDirectly)
+	end)
+
+
+	local UIARC_Main_ButtonTeleportDirectly = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonTeleportDirectly.AspectRatio = 1.028
+	UIARC_Main_ButtonTeleportDirectly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonTeleportDirectly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonTeleportDirectly.Parent = Button_TeleportDirectly_Main_ButtonDirectly
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly = Instance.new("TextBox")
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Size = UDim2.new(0.267, 0,0.548, 0)
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Position = UDim2.new(0.678, 0,0.228, 0)
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.BorderSizePixel = 0
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.FontFace.Bold = true
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.TextScaled = true
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.TextStrokeTransparency = 0
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Text = tostring(Humanoid.WalkSpeed)
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Parent = Main_ButtonTeleportDirectly_ScrollFrame
+
+	local UIARC_TextBox_HowManyTeleportDirectly = Instance.new("UIAspectRatioConstraint")
+	UIARC_TextBox_HowManyTeleportDirectly.AspectRatio = 1.59
+	UIARC_TextBox_HowManyTeleportDirectly.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_TextBox_HowManyTeleportDirectly.DominantAxis = Enum.DominantAxis.Width
+	UIARC_TextBox_HowManyTeleportDirectly.Parent = TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly
+
+
+	TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.FocusLost:Connect(function(EnterPressed)
+		if EnterPressed then
+			HowMany_TeleportDirectly = tonumber(TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Text) or 0
+
+			TextBox_HowManyTeleportDirectly_Main_ButtonTeleportDirectly.Text = tostring(HowMany_TeleportDirectly)
+
+		--	print(HowMany_TeleportDirectly)
+		end
+	end)
+end
 
 Button_Open_MainHack.MouseButton1Click:Connect(function()
 	MainHack.Visible = not MainHack.Visible
@@ -303,10 +552,16 @@ RunService.RenderStepped:Connect(function()
 	Humanoid = Character:WaitForChild("Humanoid")
 	Hrp = Character:WaitForChild("HumanoidRootPart")
 	
+	if not Hrp then return end
+	
 	if Is_Player_Speed then
 		Humanoid.WalkSpeed = Speed_Player
 	else
 		Humanoid.WalkSpeed = Default_Speed_Player
+	end
+	
+	if Is_Player_Fly then
+		Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
 	end
 	
 	if IsDrag and Current_Device == "PC" then
