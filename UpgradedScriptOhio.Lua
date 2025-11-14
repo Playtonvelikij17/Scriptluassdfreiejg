@@ -778,5 +778,3 @@ task.spawn(function()
 		end
 	end
 end)
-
--- credit delovoi_chelovek007 111
