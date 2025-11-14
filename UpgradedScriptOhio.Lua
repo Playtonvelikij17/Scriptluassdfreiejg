@@ -728,7 +728,8 @@ RunService.RenderStepped:Connect(function()
 					HightLight.FillTransparency = 0
 					HightLight.Enabled = true
 					HightLight.FillColor = Color3.fromRGB(255, 0, 4)
-					HightLight.OutlineTransparency = 0.7
+					HightLight.OutlineTransparency = 0
+					HightLight.FillTransparency = 0.56
 					HightLight.OutlineColor = Color3.fromRGB(255, 0, 4)
 					HightLight.Parent = CharOther
 			--		print("Added to: " .. v.Name)
