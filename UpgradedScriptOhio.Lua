@@ -18,7 +18,7 @@ local Is_Player_Fly = false
 local Is_Esp_Player = false
 
 local Delay_Start_Script = 2
-local Default_Speed_Player = 16
+local Default_Speed_Player = 25
 local Speed_Player = 35
 
 local HowMany_TeleportUp = 16
