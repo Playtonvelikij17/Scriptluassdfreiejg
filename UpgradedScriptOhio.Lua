@@ -608,14 +608,22 @@ RunService.RenderStepped:Connect(function()
 	Humanoid = Character:WaitForChild("Humanoid")
 	Hrp = Character:WaitForChild("HumanoidRootPart")
 	
-	if not Hrp then return end
+	
+	
+	if not Hrp or not Humanoid or not Character then return end
+	
+	if Is_Player_Speed then
+		Humanoid.WalkSpeed = Speed_Player
+	else
+		Humanoid.WalkSpeed = Default_Speed_Player
+	end
 	
 	if Is_Esp_Player then
 		for i,v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
 				local CharOther = v.Character or v.CharacterAdded:Wait()
 				
-				if not CharOther then warn("Not Character!") return end
+				if not CharOther then return end
 				
 				local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 				
@@ -638,7 +646,7 @@ RunService.RenderStepped:Connect(function()
 				if v ~= LocalPlayer then
 					local CharOther = v.Character or v.CharacterAdded:Wait()
 					
-					if not CharOther then warn("Not Character!") return end
+					if not CharOther then return end
 					
 					local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 
@@ -649,12 +657,6 @@ RunService.RenderStepped:Connect(function()
 				end
 			end
 		end
-	end
-	
-	if Is_Player_Speed then
-		Humanoid.WalkSpeed = Speed_Player
-	else
-		Humanoid.WalkSpeed = Default_Speed_Player
 	end
 	
 	if Is_Player_Fly then
