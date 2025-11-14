@@ -615,7 +615,7 @@ RunService.RenderStepped:Connect(function()
 			if v ~= LocalPlayer then
 				local CharOther = v.Character or v.CharacterAdded:Wait()
 				
-				if not CharOther then return end
+				if not CharOther then warn("Not Character!") return end
 				
 				local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 				
@@ -638,7 +638,7 @@ RunService.RenderStepped:Connect(function()
 				if v ~= LocalPlayer then
 					local CharOther = v.Character or v.CharacterAdded:Wait()
 					
-					if not CharOther then return end
+					if not CharOther then warn("Not Character!") return end
 					
 					local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 
