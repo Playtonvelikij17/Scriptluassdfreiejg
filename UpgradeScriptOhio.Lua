@@ -1,3 +1,4 @@
+task.wait(2.5)
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -778,4 +779,5 @@ task.spawn(function()
 		end
 	end
 end)
-- credit delovoi_chelovek007
+
+-- credits!!!
