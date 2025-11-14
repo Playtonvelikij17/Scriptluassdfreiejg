@@ -611,15 +611,18 @@ RunService.RenderStepped:Connect(function()
 	if not Hrp then return end
 	
 	if Is_Esp_Player then
-		for i,v in ipairs(Players:GetPlayers()) do
+		for i,v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
-				local CharOther = v.Character
+				local CharOther = v.Character or v.CharacterAdded:Wait()
+				
+				if not CharOther then return end
+				
 				local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 				
 				if CharOther and not Find_HightLight then
 					local HightLight = Instance.new("Highlight")
 					HightLight.Name = "HightLightHacks"
-					HightLight.FillTransparency = 0.5
+					HightLight.FillTransparency = 0
 					HightLight.Enabled = true
 					HightLight.FillColor = Color3.fromRGB(255, 0, 4)
 					HightLight.OutlineTransparency = 0
