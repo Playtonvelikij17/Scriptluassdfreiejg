@@ -16,6 +16,7 @@ local IsDragMobile = false
 local Is_Player_Speed = false
 local Is_Player_Fly = false
 local Is_Esp_Player = false
+local Is_Noclip_Player = false
 
 local Delay_Start_Script = 2
 local Default_Speed_Player = 25
@@ -160,7 +161,7 @@ Main_ButtonSpeed_ScrollFrame.BorderSizePixel = 0
 Main_ButtonSpeed_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonSpeed_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonSpeed_ScrollFrame.Position = UDim2.new(0.099, 0,0.28, 0)
+Main_ButtonSpeed_ScrollFrame.Position = UDim2.new(0.099, 0,0.405, 0)
 
 Main_ButtonSpeed_ScrollFrame.Parent = ScrollFrame
 
@@ -260,6 +261,9 @@ if Main_ButtonSpeed_ScrollFrame then -- settings button
 	end)
 end
 
+
+
+
 local Main_ButtonFly_ScrollFrame = Instance.new("Frame")
 
 Main_ButtonFly_ScrollFrame.BorderSizePixel = 0
@@ -327,13 +331,76 @@ if Main_ButtonFly_ScrollFrame then -- settings button
 	UIARC_Main_ButtonFly.Parent = Button_Fly_Main_ButtonFly
 end
 
+
+
+
+local Main_ButtonNoclip_ScrollFrame = Instance.new("Frame")
+
+Main_ButtonNoclip_ScrollFrame.BorderSizePixel = 0
+Main_ButtonNoclip_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+Main_ButtonNoclip_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
+Main_ButtonNoclip_ScrollFrame.Position = UDim2.new(0.099, 0,0.15, 0)
+
+Main_ButtonNoclip_ScrollFrame.Parent = ScrollFrame
+
+local Button_Noclip_Main_ButtonNoclip:TextButton = nil
+
+if Main_ButtonNoclip_ScrollFrame then -- settings button
+
+	local UIARC_Main_ButtonNoclip = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonNoclip.AspectRatio = 3.27
+	UIARC_Main_ButtonNoclip.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonNoclip.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonNoclip.Parent = Main_ButtonNoclip_ScrollFrame
+
+	Button_Noclip_Main_ButtonNoclip = Instance.new("TextButton")
+
+	Button_Noclip_Main_ButtonNoclip.Size = UDim2.new(0.453, 0,0.7, 0)
+	Button_Noclip_Main_ButtonNoclip.Position = UDim2.new(0.271, 0,0.139, 0)
+
+	Button_Noclip_Main_ButtonNoclip.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
+	Button_Noclip_Main_ButtonNoclip.BorderSizePixel = 0
+
+	Button_Noclip_Main_ButtonNoclip.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_Noclip_Main_ButtonNoclip.FontFace.Bold = true
+	Button_Noclip_Main_ButtonNoclip.TextScaled = true
+
+	Button_Noclip_Main_ButtonNoclip.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_Noclip_Main_ButtonNoclip.TextStrokeTransparency = 0
+	Button_Noclip_Main_ButtonNoclip.Text = "Player Noclip: " .. tostring(Is_Noclip_Player)
+
+	Button_Noclip_Main_ButtonNoclip.Parent = Main_ButtonNoclip_ScrollFrame
+
+	Button_Noclip_Main_ButtonNoclip.MouseButton1Click:Connect(function()
+		Is_Noclip_Player = not Is_Noclip_Player
+
+		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
+		
+		Button_Noclip_Main_ButtonNoclip.Text = "Player Noclip: " .. tostring(Is_Noclip_Player)
+	end)
+
+	local UIARC_Main_ButtonNoclip = Instance.new("UIAspectRatioConstraint")
+	UIARC_Main_ButtonNoclip.AspectRatio = 2.114
+	UIARC_Main_ButtonNoclip.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_Main_ButtonNoclip.DominantAxis = Enum.DominantAxis.Width
+	UIARC_Main_ButtonNoclip.Parent = Button_Noclip_Main_ButtonNoclip
+end
+
+
+
+
+
+
 local Main_ButtonEspPlayer_ScrollFrame = Instance.new("Frame")
 
 Main_ButtonEspPlayer_ScrollFrame.BorderSizePixel = 0
 Main_ButtonEspPlayer_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonEspPlayer_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonEspPlayer_ScrollFrame.Position = UDim2.new(0.099, 0,0.15, 0)
+Main_ButtonEspPlayer_ScrollFrame.Position = UDim2.new(0.099, 0,0.28, 0)
 
 Main_ButtonEspPlayer_ScrollFrame.Parent = ScrollFrame
 
@@ -384,13 +451,18 @@ if Main_ButtonEspPlayer_ScrollFrame then -- settings button
 	UIARC_Main_ButtonFly.Parent = Button_Fly_Main_ButtonFly
 end
 
+
+
+
+
+
 local Main_ButtonTeleportUp_ScrollFrame = Instance.new("Frame")
 
 Main_ButtonTeleportUp_ScrollFrame.BorderSizePixel = 0
 Main_ButtonTeleportUp_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonTeleportUp_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonTeleportUp_ScrollFrame.Position = UDim2.new(0.099, 0,0.405, 0)
+Main_ButtonTeleportUp_ScrollFrame.Position = UDim2.new(0.099, 0,0.535, 0)
 
 Main_ButtonTeleportUp_ScrollFrame.Parent = ScrollFrame
 
@@ -475,13 +547,16 @@ if Main_ButtonTeleportUp_ScrollFrame then -- settings button
 end
 
 
+
+
+
 local Main_ButtonTeleportDirectly_ScrollFrame = Instance.new("Frame")
 
 Main_ButtonTeleportDirectly_ScrollFrame.BorderSizePixel = 0
 Main_ButtonTeleportDirectly_ScrollFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 
 Main_ButtonTeleportDirectly_ScrollFrame.Size = UDim2.new(0.8, 0,0.15, 0)
-Main_ButtonTeleportDirectly_ScrollFrame.Position = UDim2.new(0.099, 0,0.535, 0)
+Main_ButtonTeleportDirectly_ScrollFrame.Position = UDim2.new(0.099, 0,0.665, 0)
 
 Main_ButtonTeleportDirectly_ScrollFrame.Parent = ScrollFrame
 
@@ -565,6 +640,8 @@ if Main_ButtonTeleportDirectly_ScrollFrame then -- settings button
 	end)
 end
 
+
+
 Button_Open_MainHack.MouseButton1Click:Connect(function()
 	MainHack.Visible = not MainHack.Visible
 	
@@ -578,7 +655,7 @@ end)
 MainTouch.InputBegan:Connect(function(Input)
 	if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 		IsDrag = true
-		print(IsDrag)
+	--	print(IsDrag)
 	elseif Input.UserInputType == Enum.UserInputType.Touch and Current_Device == "Mobile" then
 		IsDragMobile = true
 	--	print(IsDragMobile)
@@ -616,6 +693,24 @@ RunService.RenderStepped:Connect(function()
 		Humanoid.WalkSpeed = Speed_Player
 	else
 		Humanoid.WalkSpeed = Default_Speed_Player
+	end
+	
+	if Is_Noclip_Player then
+		for i,v in pairs(Character:GetChildren()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+		end
+	else 
+		for i,v in pairs(Character:GetChildren()) do
+			if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+				v.CanCollide = false
+			else
+				if v:IsA("BasePart") and v.Name == "HumanoidRootPart" then
+					v.CanCollide = true
+				end
+			end
+		end
 	end
 	
 	if Is_Esp_Player then
