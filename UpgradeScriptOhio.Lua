@@ -327,6 +327,11 @@ if ScrollFrame then
 		TextBox_BindFly_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindFly_Main.Text ~= "" then
 				
+				
+				if TextBox_BindFly_Main.Text == "" then
+					Bind_Player_Fly = "ButtonY"
+				end
+				
 				TextBox_BindFly_Main.Text = string.upper(TextBox_BindFly_Main.Text)
 				
 				Bind_Player_Fly = string.upper(TextBox_BindFly_Main.Text)
@@ -408,7 +413,12 @@ if ScrollFrame then
 
 		TextBox_BindNoclip_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindNoclip_Main.Text ~= "" then
-
+				
+				
+				if TextBox_BindNoclip_Main.Text == "" then
+					Bind_Player_Noclip = "ButtonY"
+				end
+				
 				TextBox_BindNoclip_Main.Text = string.upper(TextBox_BindNoclip_Main.Text)
 
 				Bind_Player_Noclip = string.upper(TextBox_BindNoclip_Main.Text)
@@ -489,7 +499,12 @@ if ScrollFrame then
 
 		TextBox_BindEspPlayers_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindEspPlayers_Main.Text ~= "" then
-
+				
+				
+				if TextBox_BindEspPlayers_Main.Text == "" then
+					Bind_Esp_Player = "ButtonY"
+				end
+				
 				TextBox_BindEspPlayers_Main.Text = string.upper(TextBox_BindEspPlayers_Main.Text)
 
 				Bind_Esp_Player = string.upper(TextBox_BindEspPlayers_Main.Text)
@@ -572,7 +587,11 @@ if ScrollFrame then
 
 		TextBox_BindSpeed_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindSpeed_Main.Text ~= "" then
-
+				
+				if TextBox_BindSpeed_Main.Text == "" then
+					Bind_Player_Speed = "ButtonY"
+				end
+				
 				TextBox_BindSpeed_Main.Text = string.upper(TextBox_BindSpeed_Main.Text)
 
 				Bind_Player_Speed = string.upper(TextBox_BindSpeed_Main.Text)
@@ -654,7 +673,12 @@ if ScrollFrame then
 
 		TextBox_BindTeleportUp_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindTeleportUp_Main.Text ~= "" then
-
+				
+				
+				if TextBox_BindTeleportUp_Main.Text == "" then
+					Bind_TeleportUp = "ButtonY"
+				end
+				
 				TextBox_BindTeleportUp_Main.Text = string.upper(TextBox_BindTeleportUp_Main.Text)
 
 				Bind_TeleportUp = string.upper(TextBox_BindTeleportUp_Main.Text)
@@ -736,8 +760,11 @@ if ScrollFrame then
 		UIARC_TextBoc_BindFly.Parent = TextBox_BindTeleportDirectly_Main
 
 		TextBox_BindTeleportDirectly_Main.FocusLost:Connect(function(Enter)
-			if Enter and TextBox_BindTeleportDirectly_Main.Text ~= "" then
-
+			if Enter then
+				
+				if TextBox_BindTeleportDirectly_Main.Text == "" then
+					Bind_TeleportDirectly = "ButtonY"
+				end
 				TextBox_BindTeleportDirectly_Main.Text = string.upper(TextBox_BindTeleportDirectly_Main.Text)
 
 				Bind_TeleportDirectly = string.upper(TextBox_BindTeleportDirectly_Main.Text)
