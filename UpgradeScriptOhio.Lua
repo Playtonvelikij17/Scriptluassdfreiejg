@@ -26,6 +26,15 @@ local Speed_Player = 35
 local HowMany_TeleportUp = 16
 local HowMany_TeleportDirectly = 16
 
+
+local Bind_Player_Fly = nil
+local Bind_Player_Noclip = nil
+local Bind_Esp_Player = nil
+
+local Bind_Player_Speed = nil
+local Bind_TeleportUp = nil
+local Bind_TeleportDirectly = nil
+
 local Current_Device = ""
 
 local Part_Fly:BasePart = nil
@@ -105,6 +114,7 @@ end
 
 
 
+
 local Button_Open_MainHack = Instance.new("TextButton")
 
 Button_Open_MainHack.Size = UDim2.new(0.144, 0,1, 0)
@@ -133,9 +143,12 @@ if Button_Open_MainHack then
 	UIARC_MainTouch.Parent = Button_Open_MainHack
 end
 
+
+
+
 local ScrollFrame = Instance.new("ScrollingFrame")
 
-ScrollFrame.Size = UDim2.new(1,0,1,0)
+ScrollFrame.Size = UDim2.new(1, 0,0.837, 0)
 ScrollFrame.Position = UDim2.new(0,0,0,0)
 
 ScrollFrame.BackgroundTransparency = 1
@@ -149,10 +162,606 @@ ScrollFrame.Parent = MainHack
 
 if ScrollFrame then
 	local UIARC_ScrollFrame = Instance.new("UIAspectRatioConstraint")
-	UIARC_ScrollFrame.AspectRatio = 1.226
+	UIARC_ScrollFrame.AspectRatio = 1.466
 	UIARC_ScrollFrame.AspectType = Enum.AspectType.FitWithinMaxSize
 	UIARC_ScrollFrame.DominantAxis = Enum.DominantAxis.Width
 	UIARC_ScrollFrame.Parent = ScrollFrame
+	
+	
+
+	local BackGroundClicked = Color3.fromRGB(109, 109, 109)
+	local BackGroundUnClicked = Color3.fromRGB(89, 89, 89)
+	
+	
+	
+	local ScrollFrameSettings = Instance.new("ScrollingFrame")
+
+	ScrollFrameSettings.Size = UDim2.new(1, 0,0.837, 0)
+	ScrollFrameSettings.Position = UDim2.new(0,0,0,0)
+
+	ScrollFrameSettings.BackgroundTransparency = 1
+	ScrollFrameSettings.BorderSizePixel = 0
+
+	ScrollFrameSettings.CanvasSize = UDim2.new(0, 0,3, 0)
+
+	ScrollFrameSettings.ScrollBarImageColor3 = Color3.fromRGB(222, 222, 222)
+
+	ScrollFrameSettings.Visible = false
+
+	ScrollFrameSettings.Parent = MainHack
+
+	local UIARC_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+	UIARC_ScrollFrameSettings.AspectRatio = 1.466
+	UIARC_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+	UIARC_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+
+
+	local Button_Open_Settings = Instance.new("TextButton")
+
+	Button_Open_Settings.Size = UDim2.new(0.498, 0,0.163, 0)
+	Button_Open_Settings.Position = UDim2.new(0, 0,0.837, 0)
+
+	Button_Open_Settings.BackgroundColor3 = Color3.fromRGB(89, 89, 89)
+	Button_Open_Settings.BorderSizePixel = 0
+
+	Button_Open_Settings.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_Open_Settings.FontFace.Bold = true
+	Button_Open_Settings.TextScaled = true
+
+	Button_Open_Settings.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_Open_Settings.TextStrokeTransparency = 0
+	Button_Open_Settings.Text = "Settings"
+
+	Button_Open_Settings.Parent = MainHack
+
+	local UIARC_ButtonSettings = Instance.new("UIAspectRatioConstraint")
+	UIARC_ButtonSettings.AspectRatio = 3.738
+	UIARC_ButtonSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_ButtonSettings.DominantAxis = Enum.DominantAxis.Width
+	UIARC_ButtonSettings.Parent = Button_Open_Settings
+
+
+
+
+	local Button_Open_Menu = Instance.new("TextButton")
+
+	Button_Open_Menu.Size = UDim2.new(0.45, 0,0.163, 0)
+	Button_Open_Menu.Position = UDim2.new(0.55, 0,0.837, 0)
+
+	Button_Open_Menu.BackgroundColor3 = Color3.fromRGB(89, 89, 89)
+	Button_Open_Menu.BorderSizePixel = 0
+
+	Button_Open_Menu.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	Button_Open_Menu.FontFace.Bold = true
+	Button_Open_Menu.TextScaled = true
+
+	Button_Open_Menu.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+	Button_Open_Menu.TextStrokeTransparency = 0
+	Button_Open_Menu.Text = "Menu"
+
+	Button_Open_Menu.Parent = MainHack
+
+	local UIARC_ButtonMenu = Instance.new("UIAspectRatioConstraint")
+	UIARC_ButtonMenu.AspectRatio = 3.377
+	UIARC_ButtonMenu.AspectType = Enum.AspectType.FitWithinMaxSize
+	UIARC_ButtonMenu.DominantAxis = Enum.DominantAxis.Width
+	UIARC_ButtonMenu.Parent = Button_Open_Menu
+	
+	
+	
+	local Main_ButtonBindButtonFly_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonFly_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonFly_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonFly_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonFly_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.023, 0)
+
+	Main_ButtonBindButtonFly_ScrollFrameSettings.Parent = ScrollFrameSettings
+	
+	if Main_ButtonBindButtonFly_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonFly_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonFly_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonFly_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonFly_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonFly_ScrollFrameSettings.Parent = Main_ButtonBindButtonFly_ScrollFrameSettings
+		
+		local LabelBindNames = Instance.new("TextLabel")
+		
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+		
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+		
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+		
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+		
+		LabelBindNames.Text = "Player Fly Bind:"
+		
+		LabelBindNames.Parent = Main_ButtonBindButtonFly_ScrollFrameSettings
+		
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+		
+		
+		
+		local TextBox_BindFly_Main = Instance.new("TextBox")
+
+		TextBox_BindFly_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindFly_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindFly_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindFly_Main.BorderSizePixel = 0
+
+		TextBox_BindFly_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindFly_Main.FontFace.Bold = true
+		TextBox_BindFly_Main.TextScaled = true
+
+		TextBox_BindFly_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindFly_Main.TextStrokeTransparency = 0
+		TextBox_BindFly_Main.Text = ""
+
+		TextBox_BindFly_Main.Parent = Main_ButtonBindButtonFly_ScrollFrameSettings
+		
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindFly_Main
+		
+		TextBox_BindFly_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindFly_Main.Text ~= "" then
+				
+				TextBox_BindFly_Main.Text = string.upper(TextBox_BindFly_Main.Text)
+				
+				Bind_Player_Fly = string.upper(TextBox_BindFly_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	
+	local Main_ButtonBindButtonNoclip_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonNoclip_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonNoclip_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonNoclip_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonNoclip_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.145, 0)
+
+	Main_ButtonBindButtonNoclip_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+	if Main_ButtonBindButtonNoclip_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonNoclip_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonNoclip_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonNoclip_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonNoclip_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonNoclip_ScrollFrameSettings.Parent = Main_ButtonBindButtonNoclip_ScrollFrameSettings
+
+		local LabelBindNames = Instance.new("TextLabel")
+
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+
+		LabelBindNames.Text = "Player Noclip Bind:"
+
+		LabelBindNames.Parent = Main_ButtonBindButtonNoclip_ScrollFrameSettings
+
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+
+
+
+		local TextBox_BindNoclip_Main = Instance.new("TextBox")
+
+		TextBox_BindNoclip_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindNoclip_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindNoclip_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindNoclip_Main.BorderSizePixel = 0
+
+		TextBox_BindNoclip_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindNoclip_Main.FontFace.Bold = true
+		TextBox_BindNoclip_Main.TextScaled = true
+
+		TextBox_BindNoclip_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindNoclip_Main.TextStrokeTransparency = 0
+		TextBox_BindNoclip_Main.Text = ""
+
+		TextBox_BindNoclip_Main.Parent = Main_ButtonBindButtonNoclip_ScrollFrameSettings
+
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindNoclip_Main
+
+		TextBox_BindNoclip_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindNoclip_Main.Text ~= "" then
+
+				TextBox_BindNoclip_Main.Text = string.upper(TextBox_BindNoclip_Main.Text)
+
+				Bind_Player_Noclip = string.upper(TextBox_BindNoclip_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	local Main_ButtonBindButtonEspPlayer_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.272, 0)
+
+	Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+	if Main_ButtonBindButtonEspPlayer_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonEspPlayer_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonEspPlayer_ScrollFrameSettings.Parent = Main_ButtonBindButtonEspPlayer_ScrollFrameSettings
+
+		local LabelBindNames = Instance.new("TextLabel")
+
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+
+		LabelBindNames.Text = "Esp Players Bind:"
+
+		LabelBindNames.Parent = Main_ButtonBindButtonEspPlayer_ScrollFrameSettings
+
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+
+
+
+		local TextBox_BindEspPlayers_Main = Instance.new("TextBox")
+
+		TextBox_BindEspPlayers_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindEspPlayers_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindEspPlayers_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindEspPlayers_Main.BorderSizePixel = 0
+
+		TextBox_BindEspPlayers_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindEspPlayers_Main.FontFace.Bold = true
+		TextBox_BindEspPlayers_Main.TextScaled = true
+
+		TextBox_BindEspPlayers_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindEspPlayers_Main.TextStrokeTransparency = 0
+		TextBox_BindEspPlayers_Main.Text = ""
+
+		TextBox_BindEspPlayers_Main.Parent = Main_ButtonBindButtonEspPlayer_ScrollFrameSettings
+
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindEspPlayers_Main
+
+		TextBox_BindEspPlayers_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindEspPlayers_Main.Text ~= "" then
+
+				TextBox_BindEspPlayers_Main.Text = string.upper(TextBox_BindEspPlayers_Main.Text)
+
+				Bind_Esp_Player = string.upper(TextBox_BindEspPlayers_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	
+	
+	local Main_ButtonBindButtonSpeed_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonSpeed_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonSpeed_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonSpeed_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonSpeed_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.4, 0)
+
+	Main_ButtonBindButtonSpeed_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+	if Main_ButtonBindButtonSpeed_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonSpeed_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonSpeed_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonSpeed_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonSpeed_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonSpeed_ScrollFrameSettings.Parent = Main_ButtonBindButtonSpeed_ScrollFrameSettings
+
+		local LabelBindNames = Instance.new("TextLabel")
+
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+
+		LabelBindNames.Text = "Speed Bind:"
+
+		LabelBindNames.Parent = Main_ButtonBindButtonSpeed_ScrollFrameSettings
+
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+
+
+
+		local TextBox_BindSpeed_Main = Instance.new("TextBox")
+
+		TextBox_BindSpeed_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindSpeed_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindSpeed_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindSpeed_Main.BorderSizePixel = 0
+
+		TextBox_BindSpeed_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindSpeed_Main.FontFace.Bold = true
+		TextBox_BindSpeed_Main.TextScaled = true
+
+		TextBox_BindSpeed_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindSpeed_Main.TextStrokeTransparency = 0
+		TextBox_BindSpeed_Main.Text = ""
+
+		TextBox_BindSpeed_Main.Parent = Main_ButtonBindButtonSpeed_ScrollFrameSettings
+
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindSpeed_Main
+
+		TextBox_BindSpeed_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindSpeed_Main.Text ~= "" then
+
+				TextBox_BindSpeed_Main.Text = string.upper(TextBox_BindSpeed_Main.Text)
+
+				Bind_Player_Speed = string.upper(TextBox_BindSpeed_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	
+	local Main_ButtonBindButtonTeleportUp_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.53, 0)
+
+	Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+	if Main_ButtonBindButtonTeleportUp_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonTeleportUp_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonTeleportUp_ScrollFrameSettings.Parent = Main_ButtonBindButtonTeleportUp_ScrollFrameSettings
+
+		local LabelBindNames = Instance.new("TextLabel")
+
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+
+		LabelBindNames.Text = "Teleport Up Bind:"
+
+		LabelBindNames.Parent = Main_ButtonBindButtonTeleportUp_ScrollFrameSettings
+
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+
+
+
+		local TextBox_BindTeleportUp_Main = Instance.new("TextBox")
+
+		TextBox_BindTeleportUp_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindTeleportUp_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindTeleportUp_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindTeleportUp_Main.BorderSizePixel = 0
+
+		TextBox_BindTeleportUp_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindTeleportUp_Main.FontFace.Bold = true
+		TextBox_BindTeleportUp_Main.TextScaled = true
+
+		TextBox_BindTeleportUp_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindTeleportUp_Main.TextStrokeTransparency = 0
+		TextBox_BindTeleportUp_Main.Text = ""
+
+		TextBox_BindTeleportUp_Main.Parent = Main_ButtonBindButtonTeleportUp_ScrollFrameSettings
+
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindTeleportUp_Main
+
+		TextBox_BindTeleportUp_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindTeleportUp_Main.Text ~= "" then
+
+				TextBox_BindTeleportUp_Main.Text = string.upper(TextBox_BindTeleportUp_Main.Text)
+
+				Bind_TeleportUp = string.upper(TextBox_BindTeleportUp_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	
+	
+	local Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings = Instance.new("Frame")
+
+	Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.BorderSizePixel = 0
+	Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+
+	Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.Size = UDim2.new(0.8, 0,0.15, 0)
+	Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.Position = UDim2.new(0.099, 0,0.66, 0)
+
+	Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.Parent = ScrollFrameSettings
+
+	if Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings then
+		local UIARC_Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings = Instance.new("UIAspectRatioConstraint")
+		UIARC_Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.AspectRatio = 3.27
+		UIARC_Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.DominantAxis = Enum.DominantAxis.Width
+		UIARC_Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings.Parent = Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings
+
+		local LabelBindNames = Instance.new("TextLabel")
+
+		LabelBindNames.BorderSizePixel = 0
+		LabelBindNames.BackgroundTransparency = 1
+
+		LabelBindNames.Size = UDim2.new(0.498, 0,0.607, 0)
+		LabelBindNames.Position = UDim2.new(0, 0,0.19, 0)
+
+		LabelBindNames.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		LabelBindNames.TextScaled = true
+		LabelBindNames.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+		LabelBindNames.TextStrokeTransparency = 0
+
+		LabelBindNames.Text = "Teleport Up Bind:"
+
+		LabelBindNames.Parent = Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings
+
+		local UIARC_LabelBindNames = Instance.new("UIAspectRatioConstraint")
+		UIARC_LabelBindNames.AspectRatio = 2.684
+		UIARC_LabelBindNames.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_LabelBindNames.DominantAxis = Enum.DominantAxis.Width
+		UIARC_LabelBindNames.Parent = LabelBindNames
+
+
+
+		local TextBox_BindTeleportDirectly_Main = Instance.new("TextBox")
+
+		TextBox_BindTeleportDirectly_Main.Size = UDim2.new(0.213, 0,0.62, 0)
+		TextBox_BindTeleportDirectly_Main.Position = UDim2.new(0.636, 0,0.19, 0)
+
+		TextBox_BindTeleportDirectly_Main.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+		TextBox_BindTeleportDirectly_Main.BorderSizePixel = 0
+
+		TextBox_BindTeleportDirectly_Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+		TextBox_BindTeleportDirectly_Main.FontFace.Bold = true
+		TextBox_BindTeleportDirectly_Main.TextScaled = true
+
+		TextBox_BindTeleportDirectly_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+
+		TextBox_BindTeleportDirectly_Main.TextStrokeTransparency = 0
+		TextBox_BindTeleportDirectly_Main.Text = ""
+
+		TextBox_BindTeleportDirectly_Main.Parent = Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings
+
+		local UIARC_TextBoc_BindFly = Instance.new("UIAspectRatioConstraint")
+		UIARC_TextBoc_BindFly.AspectRatio = 1.125
+		UIARC_TextBoc_BindFly.AspectType = Enum.AspectType.FitWithinMaxSize
+		UIARC_TextBoc_BindFly.DominantAxis = Enum.DominantAxis.Width
+		UIARC_TextBoc_BindFly.Parent = TextBox_BindTeleportDirectly_Main
+
+		TextBox_BindTeleportDirectly_Main.FocusLost:Connect(function(Enter)
+			if Enter and TextBox_BindTeleportDirectly_Main.Text ~= "" then
+
+				TextBox_BindTeleportDirectly_Main.Text = string.upper(TextBox_BindTeleportDirectly_Main.Text)
+
+				Bind_TeleportDirectly = string.upper(TextBox_BindTeleportDirectly_Main.Text)
+			end
+		end)
+	end
+	
+	
+	
+	Button_Open_Settings.MouseButton1Click:Connect(function()
+		ScrollFrameSettings.Visible = true
+		ScrollFrame.Visible = false
+		
+		Button_Open_Settings.BackgroundColor3 = BackGroundClicked
+		Button_Open_Menu.BackgroundColor3 = BackGroundUnClicked
+	end)
+	
+	Button_Open_Menu.MouseButton1Click:Connect(function()
+		ScrollFrameSettings.Visible = false
+		ScrollFrame.Visible = true
+
+		Button_Open_Settings.BackgroundColor3 = BackGroundUnClicked
+		Button_Open_Menu.BackgroundColor3 = BackGroundClicked
+	end)
 end
 
 
@@ -542,7 +1151,7 @@ if Main_ButtonTeleportUp_ScrollFrame then -- settings button
 			
 			TextBox_HowManyTeleportUp_Main_ButtonTeleportUp.Text = tostring(HowMany_TeleportUp)
 			
-			print(HowMany_TeleportUp)
+		--	print(HowMany_TeleportUp)
 		end
 	end)
 end
@@ -680,6 +1289,45 @@ UserInputService.InputEnded:Connect(function(Input, IsTyping)
 end)
 
 
+UserInputService.InputBegan:Connect(function(Input, IsTyping)
+	if IsTyping then return end
+	
+	if Bind_Player_Fly and Input.KeyCode == Enum.KeyCode[Bind_Player_Fly] then
+		Is_Player_Fly = not Is_Player_Fly
+		
+		if Is_Player_Fly then
+			Part_Fly = Instance.new("Part")
+			Part_Fly.Size = Vector3.new(5, 0.6, 5)
+			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
+			Part_Fly.Transparency = 0.2
+			Part_Fly.Parent = workspace
+		else 
+			if Part_Fly then
+				Part_Fly:Destroy()
+				Part_Fly = nil
+			end
+		end
+		
+		Button_Fly_Main_ButtonFly.Text = "Player Fly: " .. tostring(Is_Player_Fly)
+	elseif Bind_Player_Noclip and Input.KeyCode == Enum.KeyCode[Bind_Player_Noclip] then
+		Is_Noclip_Player = not Is_Noclip_Player
+		
+		Button_Noclip_Main_ButtonNoclip.Text = "Noclip Player: " .. tostring(Is_Noclip_Player)
+	elseif Bind_Esp_Player and Input.KeyCode == Enum.KeyCode[Bind_Esp_Player] then
+		Is_Esp_Player = not Is_Esp_Player
+		
+		Button_EspPlayer_Main_ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
+	elseif Bind_Player_Speed and Input.KeyCode == Enum.KeyCode[Bind_Player_Speed] then
+		Is_Player_Speed = not Is_Player_Speed
+		
+		Button_TurnSpeed_Main_ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
+	elseif Bind_TeleportUp and Input.KeyCode == Enum.KeyCode[Bind_TeleportUp] then
+		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,HowMany_TeleportUp,0)
+	elseif Bind_TeleportDirectly and Input.KeyCode == Enum.KeyCode[Bind_TeleportDirectly] then
+		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,0,-HowMany_TeleportDirectly)
+	end
+end)
+
 
 RunService.RenderStepped:Connect(function()
 	Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -779,5 +1427,3 @@ task.spawn(function()
 		end
 	end
 end)
-
--- credits!!!
