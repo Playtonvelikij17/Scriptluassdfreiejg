@@ -1,7 +1,7 @@
-task.wait(2.5)
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
 
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
@@ -59,6 +59,7 @@ if not LocalPlayer then
 	return
 else 
 	print("Player is loaded!")
+	StarterGui:SetCore("SendNotification", {"Ohio script", "Player is loaded!", Duration = 3.5})
 end
 
 print("Player device: " .. Current_Device)
@@ -314,7 +315,7 @@ if ScrollFrame then
 		TextBox_BindFly_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindFly_Main.TextStrokeTransparency = 0
-		TextBox_BindFly_Main.Text = ""
+		TextBox_BindFly_Main.Text = "None"
 
 		TextBox_BindFly_Main.Parent = Main_ButtonBindButtonFly_ScrollFrameSettings
 		
@@ -328,13 +329,24 @@ if ScrollFrame then
 			if Enter and TextBox_BindFly_Main.Text ~= "" then
 				
 				
-				if TextBox_BindFly_Main.Text == "" then
-					Bind_Player_Fly = "ButtonY"
+				if TextBox_BindFly_Main.Text == "None" or TextBox_BindFly_Main.Text == "" then
+					Bind_Player_Fly = "RightControl"
+					TextBox_BindFly_Main.Text = "None"
+					--	print("TextBox is None save bind to: RightControl")
+					return
 				end
 				
 				TextBox_BindFly_Main.Text = string.upper(TextBox_BindFly_Main.Text)
 				
 				Bind_Player_Fly = string.upper(TextBox_BindFly_Main.Text)
+			end
+			
+			if not Enter then
+				if TextBox_BindFly_Main.Text == "None" or TextBox_BindFly_Main.Text == "" then
+					Bind_Player_Fly = "RightControl"
+					TextBox_BindFly_Main.Text = "None"
+					--		print("TextBox is None save bind to: RightControl")
+				end
 			end
 		end)
 	end
@@ -401,7 +413,7 @@ if ScrollFrame then
 		TextBox_BindNoclip_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindNoclip_Main.TextStrokeTransparency = 0
-		TextBox_BindNoclip_Main.Text = ""
+		TextBox_BindNoclip_Main.Text = "None"
 
 		TextBox_BindNoclip_Main.Parent = Main_ButtonBindButtonNoclip_ScrollFrameSettings
 
@@ -415,13 +427,24 @@ if ScrollFrame then
 			if Enter and TextBox_BindNoclip_Main.Text ~= "" then
 				
 				
-				if TextBox_BindNoclip_Main.Text == "" then
-					Bind_Player_Noclip = "ButtonY"
+				if TextBox_BindNoclip_Main.Text == "None" or TextBox_BindNoclip_Main.Text == "" then
+					Bind_Player_Noclip = "RightControl"
+					TextBox_BindNoclip_Main.Text = "None"
+					--	print("TextBox is None save bind to: RightControl")
+					return
 				end
 				
 				TextBox_BindNoclip_Main.Text = string.upper(TextBox_BindNoclip_Main.Text)
 
 				Bind_Player_Noclip = string.upper(TextBox_BindNoclip_Main.Text)
+			end
+			
+			if not Enter then
+				if TextBox_BindNoclip_Main.Text == "None" or TextBox_BindNoclip_Main.Text == "" then
+					Bind_Player_Noclip = "RightControl"
+					TextBox_BindNoclip_Main.Text = "None"
+					--		print("TextBox is None save bind to: RightControl")
+				end
 			end
 		end)
 	end
@@ -487,7 +510,7 @@ if ScrollFrame then
 		TextBox_BindEspPlayers_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindEspPlayers_Main.TextStrokeTransparency = 0
-		TextBox_BindEspPlayers_Main.Text = ""
+		TextBox_BindEspPlayers_Main.Text = "None"
 
 		TextBox_BindEspPlayers_Main.Parent = Main_ButtonBindButtonEspPlayer_ScrollFrameSettings
 
@@ -501,13 +524,23 @@ if ScrollFrame then
 			if Enter and TextBox_BindEspPlayers_Main.Text ~= "" then
 				
 				
-				if TextBox_BindEspPlayers_Main.Text == "" then
-					Bind_Esp_Player = "ButtonY"
+				if TextBox_BindEspPlayers_Main.Text == "None" or TextBox_BindEspPlayers_Main.Text == "" then
+					Bind_Esp_Player = "RightControl"
+					TextBox_BindEspPlayers_Main.Text = "None"
+					--	print("TextBox is None save bind to: RightControl")
+					return
 				end
 				
 				TextBox_BindEspPlayers_Main.Text = string.upper(TextBox_BindEspPlayers_Main.Text)
 
 				Bind_Esp_Player = string.upper(TextBox_BindEspPlayers_Main.Text)
+			end
+			
+			if TextBox_BindEspPlayers_Main.Text == "None" or TextBox_BindEspPlayers_Main.Text == "" then
+				Bind_Esp_Player = "RightControl"
+				TextBox_BindEspPlayers_Main.Text = "None"
+				--	print("TextBox is None save bind to: RightControl")
+				return
 			end
 		end)
 	end
@@ -575,7 +608,7 @@ if ScrollFrame then
 		TextBox_BindSpeed_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindSpeed_Main.TextStrokeTransparency = 0
-		TextBox_BindSpeed_Main.Text = ""
+		TextBox_BindSpeed_Main.Text = "None"
 
 		TextBox_BindSpeed_Main.Parent = Main_ButtonBindButtonSpeed_ScrollFrameSettings
 
@@ -588,13 +621,24 @@ if ScrollFrame then
 		TextBox_BindSpeed_Main.FocusLost:Connect(function(Enter)
 			if Enter and TextBox_BindSpeed_Main.Text ~= "" then
 				
-				if TextBox_BindSpeed_Main.Text == "" then
-					Bind_Player_Speed = "ButtonY"
+				if TextBox_BindSpeed_Main.Text == "None" or TextBox_BindSpeed_Main.Text == "" then
+					Bind_Player_Speed = "RightControl"
+					TextBox_BindSpeed_Main.Text = "None"
+					--	print("TextBox is None save bind to: RightControl")
+					return
 				end
 				
 				TextBox_BindSpeed_Main.Text = string.upper(TextBox_BindSpeed_Main.Text)
 
 				Bind_Player_Speed = string.upper(TextBox_BindSpeed_Main.Text)
+			end
+			
+			if not Enter then
+				if TextBox_BindSpeed_Main.Text == "None" or TextBox_BindSpeed_Main.Text == "" then
+					Bind_Player_Speed = "RightControl"
+					TextBox_BindSpeed_Main.Text = "None"
+					--		print("TextBox is None save bind to: RightControl")
+				end
 			end
 		end)
 	end
@@ -661,7 +705,7 @@ if ScrollFrame then
 		TextBox_BindTeleportUp_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindTeleportUp_Main.TextStrokeTransparency = 0
-		TextBox_BindTeleportUp_Main.Text = ""
+		TextBox_BindTeleportUp_Main.Text = "None"
 
 		TextBox_BindTeleportUp_Main.Parent = Main_ButtonBindButtonTeleportUp_ScrollFrameSettings
 
@@ -675,13 +719,24 @@ if ScrollFrame then
 			if Enter and TextBox_BindTeleportUp_Main.Text ~= "" then
 				
 				
-				if TextBox_BindTeleportUp_Main.Text == "" then
-					Bind_TeleportUp = "ButtonY"
+				if TextBox_BindTeleportUp_Main.Text == "None" or TextBox_BindTeleportUp_Main.Text == "" then
+					Bind_TeleportUp = "RightControl"
+					TextBox_BindTeleportUp_Main.Text = "None"
+				--	print("TextBox is None save bind to: RightControl")
+					return
 				end
 				
 				TextBox_BindTeleportUp_Main.Text = string.upper(TextBox_BindTeleportUp_Main.Text)
 
 				Bind_TeleportUp = string.upper(TextBox_BindTeleportUp_Main.Text)
+			end
+			
+			if not Enter then
+				if TextBox_BindTeleportUp_Main.Text == "None" or TextBox_BindTeleportUp_Main.Text == "" then
+					Bind_TeleportUp = "RightControl"
+					TextBox_BindTeleportUp_Main.Text = "None"
+			--		print("TextBox is None save bind to: RightControl")
+				end
 			end
 		end)
 	end
@@ -749,7 +804,7 @@ if ScrollFrame then
 		TextBox_BindTeleportDirectly_Main.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 		TextBox_BindTeleportDirectly_Main.TextStrokeTransparency = 0
-		TextBox_BindTeleportDirectly_Main.Text = ""
+		TextBox_BindTeleportDirectly_Main.Text = "None"
 
 		TextBox_BindTeleportDirectly_Main.Parent = Main_ButtonBindButtonTeleportDirectly_ScrollFrameSettings
 
@@ -762,12 +817,23 @@ if ScrollFrame then
 		TextBox_BindTeleportDirectly_Main.FocusLost:Connect(function(Enter)
 			if Enter then
 				
-				if TextBox_BindTeleportDirectly_Main.Text == "" then
-					Bind_TeleportDirectly = "ButtonY"
+				if TextBox_BindTeleportDirectly_Main.Text == "None" or TextBox_BindTeleportDirectly_Main.Text == "" then
+					Bind_TeleportDirectly = "RightControl"
+					TextBox_BindTeleportDirectly_Main.Text = "None"
+			--		print("TextBox is None save bind to: RightControl")
+					return
 				end
 				TextBox_BindTeleportDirectly_Main.Text = string.upper(TextBox_BindTeleportDirectly_Main.Text)
 
 				Bind_TeleportDirectly = string.upper(TextBox_BindTeleportDirectly_Main.Text)
+			end
+			
+			if not Enter then
+				if TextBox_BindTeleportDirectly_Main.Text == "None" or TextBox_BindTeleportDirectly_Main.Text == "" then
+					Bind_TeleportDirectly = "RightControl"
+					TextBox_BindTeleportDirectly_Main.Text = "None"
+			--		print("TextBox is None save bind to: RightControl")
+				end
 			end
 		end)
 	end
