@@ -17,6 +17,7 @@ local IsDragMobile = false
 local Is_Player_Speed = false
 local Is_Player_Fly = false
 local Is_Esp_Player = false
+local Is_Freeze_Player = false
 local Is_Noclip_Player = false
 
 local Delay_Start_Script = 2
@@ -30,6 +31,7 @@ local HowMany_TeleportDirectly = 16
 local Bind_Player_Fly = nil
 local Bind_Player_Noclip = nil
 local Bind_Esp_Player = nil
+local Bind_Freeze_Player = nil
 
 local Bind_Player_Speed = nil
 local Bind_TeleportUp = nil
@@ -62,7 +64,7 @@ if not LocalPlayer then
 	return
 else 
 	print("Player is loaded!")
-	StarterGui:SetCore("SendNotification", {"Ohio script", "Player is loaded!", Duration = 3.5})
+	StarterGui:SetCore("SendNotification", {Title = "Ohio script", Text = "Player is loaded!", Duration = 3})
 end
 
 print("Player device: " .. Current_Device)
@@ -72,8 +74,8 @@ Humanoid = Character:WaitForChild("Humanoid")
 Hrp = Character:WaitForChild("HumanoidRootPart")
 
 
-local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
---local ScriptHackUI = StarterGui:WaitForChild("SosalSCript"):Clone()
+--local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
+local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
 
 ScriptHackUI.Parent = LocalPlayer.PlayerGui
 
@@ -89,6 +91,7 @@ local ScrollSettings = MainHack:WaitForChild("ScrollSettings")
 local MainFlyPlayer = ScrollMenu:WaitForChild("MainFlyPlayer")
 local MainNNoclip = ScrollMenu:WaitForChild("MainNoclip")
 local MainEspPlayer = ScrollMenu:WaitForChild("MainEspPlayer")
+local MainFreezePlayer = ScrollMenu:WaitForChild("MainFreezePlayer")
 
 
 local MainSpeed = ScrollMenu:WaitForChild("MainSpeed")
@@ -101,6 +104,7 @@ local MainTeleportDirectly = ScrollMenu:WaitForChild("MainTeleportDirectly")
 local MainBindFlyPlayer = ScrollSettings:WaitForChild("BindPlayerFly")
 local MainBindNoclip = ScrollSettings:WaitForChild("BindNoclip")
 local MainBindEspPlayer = ScrollSettings:WaitForChild("BindEspPlayer")
+local MainBindFreezePlayer = ScrollSettings:WaitForChild("BindFreezePlayer")
 
 local MainBindSpeed = ScrollSettings:WaitForChild("BindSpeed")
 local MainBindTeleportUp = ScrollSettings:WaitForChild("BindTeleportUp")
@@ -179,6 +183,30 @@ MainBindEspPlayer.BoxEspPlayer.FocusLost:Connect(function(Enter)
 
 	if MainBindEspPlayer.BoxEspPlayer.Text == "None" or MainBindEspPlayer.BoxEspPlayer.Text == "" then
 		Bind_Esp_Player = "RightControl"
+		MainBindEspPlayer.BoxEspPlayer.Text = "None"
+		--	print("TextBox is None save bind to: RightControl")
+		return
+	end
+end)
+
+MainBindFreezePlayer.BoxFreezePlayer.FocusLost:Connect(function(Enter)
+	if Enter then
+
+
+		if MainBindFreezePlayer.BoxFreezePlayer.Text == "None" or MainBindFreezePlayer.BoxFreezePlayer.Text == "" then
+			Bind_Freeze_Player = "RightControl"
+			MainBindFreezePlayer.BoxFreezePlayer.Text = "None"
+			--	print("TextBox is None save bind to: RightControl")
+			return
+		end
+
+		MainBindFreezePlayer.BoxFreezePlayer.Text = string.upper(MainBindFreezePlayer.BoxFreezePlayer.Text)
+
+		Bind_Freeze_Player = string.upper(MainBindFreezePlayer.BoxFreezePlayer.Text)
+	end
+
+	if MainBindFreezePlayer.BoxFreezePlayer.Text == "None" or MainBindFreezePlayer.BoxFreezePlayer.Text == "" then
+		Bind_Freeze_Player = "RightControl"
 		MainBindEspPlayer.BoxEspPlayer.Text = "None"
 		--	print("TextBox is None save bind to: RightControl")
 		return
@@ -316,11 +344,15 @@ local function SystemButtons()
 	MainEspPlayer.ButtonEspPlayer.MouseButton1Click:Connect(function()
 		Is_Esp_Player = not Is_Esp_Player
 
-		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
-
 		MainEspPlayer.ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
 
 	--	print(Is_Esp_Player)
+	end)
+	
+	MainFreezePlayer.ButtonEspPlayer.MouseButton1Click:Connect(function()
+		Is_Freeze_Player = not Is_Freeze_Player
+		
+		MainFreezePlayer.ButtonEspPlayer.Text = "Freeze Player: " .. tostring(Is_Freeze_Player)
 	end)
 	
 	
@@ -459,6 +491,10 @@ UserInputService.InputBegan:Connect(function(Input, IsTyping)
 		Is_Player_Speed = not Is_Player_Speed
 		
 		MainSpeed.ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
+	elseif Bind_Freeze_Player and Input.KeyCode == Enum.KeyCode[Bind_Freeze_Player] then
+		Is_Freeze_Player = not Is_Freeze_Player
+		MainFreezePlayer.ButtonEspPlayer.Text = "Freeze Player: " .. tostring(Is_Freeze_Player)
+	
 	elseif Bind_TeleportUp and Input.KeyCode == Enum.KeyCode[Bind_TeleportUp] then
 		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,HowMany_TeleportUp,0)
 	elseif Bind_TeleportDirectly and Input.KeyCode == Enum.KeyCode[Bind_TeleportDirectly] then
@@ -498,6 +534,12 @@ RunService.RenderStepped:Connect(function()
 				end
 			end
 		end
+	end
+	
+	if Is_Freeze_Player then
+		Hrp.Anchored = true
+	else 
+		Hrp.Anchored = false
 	end
 	
 	if Is_Esp_Player then
@@ -557,7 +599,6 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
-
 task.spawn(function()
 	while task.wait() do
 		if Is_Player_Fly then
@@ -565,5 +606,3 @@ task.spawn(function()
 		end
 	end
 end)
-
--- sfsa
