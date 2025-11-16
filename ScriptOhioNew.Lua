@@ -22,7 +22,7 @@ local Is_Noclip_Player = false
 
 local Delay_Start_Script = 2
 local Default_Speed_Player = 25
-local Speed_Player = 35
+local Speed_Player = 25
 
 local HowMany_TeleportUp = 16
 local HowMany_TeleportDirectly = 16
@@ -360,28 +360,25 @@ local function SystemButtons()
 		Is_Player_Speed = not Is_Player_Speed
 
 		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
-
+		
 		if Is_Player_Speed then
-			Speed_Player = MainSpeed.BoxSpeed.Text
-
-			MainSpeed.BoxSpeed.Text = tostring(Speed_Player)
-		else
-			if not Is_Player_Speed then
-				Speed_Player = 16
-				--	print("Speed_Player = 16!")
-			end
+			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
+		else 
+			Speed_Player = 16
 		end
+		
 		MainSpeed.ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
+		
+	--	print("нажали на кнопку! и Speed_Player: " .. tostring(Speed_Player) .. " Humanoid.WalkSpeed: " .. Humanoid.WalkSpeed)
 	end)
 	
 	MainSpeed.BoxSpeed.FocusLost:Connect(function(EnterPressed)
-		if EnterPressed and Is_Player_Speed then
-
-			Speed_Player = MainSpeed.BoxSpeed.Text
-
-			Humanoid.WalkSpeed = tonumber(Speed_Player) or 0
-
+		if EnterPressed then
+			
+			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
+			
 			MainSpeed.BoxSpeed.Text = tostring(Speed_Player)
+	--		print("ентер и Speed_Player: " .. tostring(Speed_Player) .. " Humanoid.WalkSpeed: " .. Humanoid.WalkSpeed)
 
 			--	print("Speed Hum: " .. Humanoid.WalkSpeed .. " Speed_Player: " .. Speed_Player)
 		end
@@ -489,6 +486,12 @@ UserInputService.InputBegan:Connect(function(Input, IsTyping)
 		MainEspPlayer.ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
 	elseif Bind_Player_Speed and Input.KeyCode == Enum.KeyCode[Bind_Player_Speed] then
 		Is_Player_Speed = not Is_Player_Speed
+		
+		if Is_Player_Speed then
+			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
+		else 
+			Speed_Player = 16
+		end
 		
 		MainSpeed.ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
 	elseif Bind_Freeze_Player and Input.KeyCode == Enum.KeyCode[Bind_Freeze_Player] then
