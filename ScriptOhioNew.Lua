@@ -73,7 +73,7 @@ Hrp = Character:WaitForChild("HumanoidRootPart")
 
 
 local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
---local ScriptHackUI = StarterGui:WaitForChild("ScriptHackUI"):Clone()
+--local ScriptHackUI = StarterGui:WaitForChild("SosalSCript"):Clone()
 
 ScriptHackUI.Parent = LocalPlayer.PlayerGui
 
@@ -110,7 +110,7 @@ MainTouch.Visible = true
 
 -- ScrollSettings
 MainBindFlyPlayer.BoxFly.FocusLost:Connect(function(Enter)
-	if Enter and MainBindFlyPlayer.BoxFly.Text ~= "" then
+	if Enter then
 
 
 		if MainBindFlyPlayer.BoxFly.Text == "None" or MainBindFlyPlayer.BoxFly.Text == "" then
@@ -136,7 +136,7 @@ end)
 
 
 MainBindNoclip.BoxNoclip.FocusLost:Connect(function(Enter)
-	if Enter and MainBindNoclip.BoxNoclip.Text ~= "" then
+	if Enter then
 
 
 		if MainBindNoclip.BoxNoclip.Text == "None" or MainBindNoclip.BoxNoclip.Text == "" then
@@ -162,7 +162,7 @@ end)
 
 
 MainBindEspPlayer.BoxEspPlayer.FocusLost:Connect(function(Enter)
-	if Enter and MainBindEspPlayer.BoxEspPlayer.Text ~= "" then
+	if Enter then
 
 
 		if MainBindEspPlayer.BoxEspPlayer.Text == "None" or MainBindEspPlayer.BoxEspPlayer.Text == "" then
@@ -187,7 +187,7 @@ end)
 	
 
 MainBindSpeed.BoxSpeed.FocusLost:Connect(function(Enter)
-	if Enter and MainBindSpeed.BoxSpeed.Text ~= "" then
+	if Enter then
 
 		if MainBindSpeed.BoxSpeed.Text == "None" or MainBindSpeed.BoxSpeed.Text == "" then
 			Bind_Player_Speed = "RightControl"
@@ -212,7 +212,7 @@ end)
 
 
 MainBindTeleportUp.BoxTeleportUp.FocusLost:Connect(function(Enter)
-	if Enter and MainBindTeleportUp.BoxTeleportUp.Text ~= "" then
+	if Enter then
 
 
 		if MainBindTeleportUp.BoxTeleportUp.Text == "None" or MainBindTeleportUp.BoxTeleportUp.Text == "" then
@@ -565,3 +565,5 @@ task.spawn(function()
 		end
 	end
 end)
+
+-- sfsa
