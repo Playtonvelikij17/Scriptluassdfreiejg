@@ -21,7 +21,10 @@ local Is_Freeze_Player = false
 local Is_Noclip_Player = false
 
 local Delay_Start_Script = 2
+
+
 local Default_Speed_Player = 25
+
 local Speed_Player = 25
 
 local HowMany_TeleportUp = 16
@@ -74,8 +77,8 @@ Humanoid = Character:WaitForChild("Humanoid")
 Hrp = Character:WaitForChild("HumanoidRootPart")
 
 
-local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
---local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
+--local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
+local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
 
 ScriptHackUI.Parent = LocalPlayer.PlayerGui
 
@@ -111,6 +114,12 @@ local MainBindTeleportUp = ScrollSettings:WaitForChild("BindTeleportUp")
 local MainBindTeleportDirectly = ScrollSettings:WaitForChild("BindTeleportDirectly")
 
 MainTouch.Visible = true
+
+MainSpeed.BoxSpeed.Text = Default_Speed_Player
+MainTeleportUp.BoxTeleportUp.Text = HowMany_TeleportUp
+MainTeleportDirectly.BoxTeleportDirectly.Text = HowMany_TeleportDirectly
+
+print(MainTeleportDirectly.BoxTeleportDirectly.Text)
 
 -- ScrollSettings
 MainBindFlyPlayer.BoxFly.FocusLost:Connect(function(Enter)
@@ -609,4 +618,4 @@ task.spawn(function()
 		end
 	end
 end)
--- credit delovoi_chelovek007 update 1!
+-- credit delovoi_chelovek007 update 2
