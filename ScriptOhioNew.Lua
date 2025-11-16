@@ -74,8 +74,8 @@ Humanoid = Character:WaitForChild("Humanoid")
 Hrp = Character:WaitForChild("HumanoidRootPart")
 
 
---local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
-local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
+local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
+--local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
 
 ScriptHackUI.Parent = LocalPlayer.PlayerGui
 
