@@ -31,6 +31,8 @@ for i,v in pairs(UI:GetChildren()) do
 	end
 end
 
+StarterGui:SetCore("SendNotification", {Title = "Steal a brainrot script", Text = "Player is loaded!", Duration = 4.5})
+
 
 local Character = LocalPlayer.Character
 local Humanoid:Humanoid = Character:WaitForChild("Humanoid")
@@ -106,4 +108,4 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
--- creditss
+-- credit yoo
