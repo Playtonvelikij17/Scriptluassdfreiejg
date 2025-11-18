@@ -1,620 +1,508 @@
 local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
-local StarterGui = game:GetService("StarterGui")
 
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
-local Character:Model = nil
-local Humanoid:Humanoid = nil
+local Duration_Start_Script = 2.5
+local Device = nil
 
-local Hrp:BasePart = nil
+--local TableBrainrots = {
+--	"La Vacca Saturno Saturnita",
+--	"Graipuss Medussi",
+----	"Orcalero Orcala",
+--	"Guerriro Digitale",
+--	"Dul Dul Dul",
+--	"Chicleteira Bicicleteira",
+--	"To to to Sahur",
+--	"Matteo",
+--	"67",
+--}
 
-local IsDrag = false
-local IsDragMobile = false
+local TableBrainrots = {
+	"1x1x1x1",
+	"67",
+	"Matteo",
+	"Agarrini La Palini",
+	"Aquatic Index",
+	"Bicicleteira Family",
+	"Bisonte Giuppitere",
+	"Blackhole Goat",
+	"Boatito Auratito",
+	"Burguro and Fryuro",
+	"Burrito Bandito",
+	"Capitano Moby",
+	"Celularcini Viciosini",
+	"Chachechi",
+	"Chicleteira Bicicleteira",
+	"Chicleteirina Bicicleteirina",
+	"Chillin Chili",
+	"Chimpanzini Spiderini",
+	"Chipso and Queso",
+	"Combinasions",
+	"Cooki and Milki",
+	"Dragon Cannelloni",
+	"Dul Dul Dul",
+	"Duo Brainrots",
+	"Esok Sekolah",
+	"Eviledon",
+	"Extinct Matteo",
+	"Extinct Tralalero",
+	"Fragola La La La",
+	"Fragrama and Chocrama",
+	"Frankentteo",
+	"Garama and Madundung",
+	"Graipuss Medussi",
+	"Guest 666",
+	"Headless Horseman",
+	"Horegini Boom",
+	"Jackorilla",
+	"Job Job Job Sahur",
+	"Karker Sahur",
+	"Karkerkar Kurkur",
+	"Karkerkur Family",
+	"Ketchuru and Musturu",
+	"Ketupat Kepat",
+	"La Casa Boo",
+	"La Cucaracha",
+	"La Extinct Grande",
+	"La Grande Combinasion",
+	"La Karkerkar Combinasion",
+	"La Sahur Combinasion",
+	"La Secret Combinasion",
+	"La Spooky Grande",
+	"La Supreme Combinasion",
+	"La Taco Combinasion",
+	"La Vacca Jacko Linterino",
+	"La Vacca Saturno Saturnita",
+	"Las Sis",
+	"Las Tralaleritas",
+	"Las Vaquitas Saturnitas",
+	"Los 67",
+	"Los Bros",
+	"Los Chicleteiras",
+	"Los Combinasionas",
+	"Los Hotspotsitos",
+	"Los Jobcitos",
+	"Los Karkeritos",
+	"Los Matteos",
+	"Los Mobilis",
+	"Los Nooo My Hotspotsitos",
+	"Los Primos",
+	"Los Spaghettis",
+	"Los Spooky Combinasionas",
+	"Los Spyderinis",
+	"Los Tacoritas",
+	"Los Tortus",
+	"Los Tralaleritos",
+	"Mariachi Corazoni",
+	"Mieteteira Bicicleteira",
+	"Money Money Puggy",
+	"Noo my Candy",
+	"Noo my examine",
+	"Nooo My Hotspot",
+	"Nuclearo Dinossauro",
+	"Perrito Burrito",
+	"Pirulitoita Bicicleteira",
+	"Pot Hotspot",
+	"Pot Pumpkin",
+	"Pumpkini Spyderini",
+	"Quesadilla Crocodila",
+	"Quesadillo Vampiro",
+	"Rang Ring Bus",
+	"Sammyni Spyderini",
+	"Spaghetti Tualetti",
+	"Spooky and Pumpky",
+	"Spooky Juggle",
+	"Tacorita Bicicleta",
+	"Tamaluk un Meass",
+	"Tang Tang Keletang",
+	"Tictac Sahur",
+	"To to to Sahur",
+	"Torrtuginni Dragonfrutini",
+	"Tralaledon",
+	"Trenostruzzo Turbo 4000",
+	"Trickolino",
+	"Vulturino Skeletono",
+	"Yess my examine",
+	"Zombie Tralala"
+}
 
-local Is_Player_Speed = false
-local Is_Player_Fly = false
-local Is_Esp_Player = false
-local Is_Freeze_Player = false
-local Is_Noclip_Player = false
-
-local Delay_Start_Script = 2
-
-
-local Default_Speed_Player = 25
-
-local Speed_Player = 25
-
-local HowMany_TeleportUp = 16
-local HowMany_TeleportDirectly = 16
-
-
-local Bind_Player_Fly = nil
-local Bind_Player_Noclip = nil
-local Bind_Esp_Player = nil
-local Bind_Freeze_Player = nil
-
-local Bind_Player_Speed = nil
-local Bind_TeleportUp = nil
-local Bind_TeleportDirectly = nil
-
-local Current_Device = ""
-
-local Part_Fly:BasePart = nil
-
-local BackGroundClicked = Color3.fromRGB(109, 109, 109)
-local BackGroundUnClicked = Color3.fromRGB(89, 89, 89)
 
 while task.wait() do
-	if LocalPlayer then
-		if UserInputService.TouchEnabled then
-			Current_Device = "Mobile"
-			break
-		else 
-			Current_Device = "PC"
-			break
-		end
+	if LocalPlayer.Character and UserInputService.TouchEnabled then
+		Device = "Mobile"
+		break
+	else 
+		Device = "PC"
+		break
 	end
 end
 
+task.wait(Duration_Start_Script)
 
-task.wait(Delay_Start_Script)
+--local UI = game:GetService("ReplicatedStorage").ScriptStealABrainrotUI:Clone()
+local UI:ScreenGui = game:GetObjects("rbxassetid://104514587943170")[1]
+UI.Parent = LocalPlayer.PlayerGui
+UI.ResetOnSpawn = false
 
-if not LocalPlayer then
-	warn("Player is not loaded!")
-	return
-else 
-	print("Player is loaded!")
-	StarterGui:SetCore("SendNotification", {Title = "Ohio script", Text = "Player is loaded!", Duration = 3})
+for i,v in pairs(UI:GetChildren()) do
+	if v:IsA("Frame") then
+		v.Visible = true
+	end
 end
 
-print("Player device: " .. Current_Device)
+local function Notifications()
+	StarterGui:SetCore("SendNotification", {Title = "Steal a brainrot script", Text = "Player is loaded!", Duration = 2.5})
+	task.delay(0.5, function()
+		StarterGui:SetCore("SendNotification", {Title = "Steal a brainrot script", Text = "Press to C for activate Jump Boost!", Duration = 3.5})
+	end)
+end
 
-Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-Humanoid = Character:WaitForChild("Humanoid")
-Hrp = Character:WaitForChild("HumanoidRootPart")
+Notifications()
 
+local Character = LocalPlayer.Character
+local Humanoid:Humanoid = Character:WaitForChild("Humanoid")
 
-local ScriptHackUI = game:GetObjects("rbxassetid://100161377617296")[1]
---local ScriptHackUI = StarterGui:WaitForChild("ScriptOhioUI"):Clone()
+local IsJumpBoost = false
+local IsDragJump_Power = false
 
-ScriptHackUI.Parent = LocalPlayer.PlayerGui
+local IsEspPlayers = false
+local IsDrag_Esp_Players = false
 
-local MainTouch = ScriptHackUI:WaitForChild("MainTouch")
-local MainHack = MainTouch:WaitForChild("MainHack")
+local IsShow_Brainrots = false
+local IsDrag_Show_Brainrots = false
 
-local Button_Open_MainHack = MainTouch:WaitForChild("ButtonOpenHack")
+local Default_JumpPower = Humanoid.JumpPower
+local Jump_Power = 80
 
-local ScrollMenu = MainHack:WaitForChild("ScrollMenu")
-local ScrollSettings = MainHack:WaitForChild("ScrollSettings")
+local BackGround_TurnON = Color3.fromRGB(67, 222, 36)
+local BackGround_TurnOFF = Color3.fromRGB(255, 52, 55)
 
--- ScrollMenu
-local MainFlyPlayer = ScrollMenu:WaitForChild("MainFlyPlayer")
-local MainNNoclip = ScrollMenu:WaitForChild("MainNoclip")
-local MainEspPlayer = ScrollMenu:WaitForChild("MainEspPlayer")
-local MainFreezePlayer = ScrollMenu:WaitForChild("MainFreezePlayer")
+local MainJumpBoost = UI:WaitForChild("MainJumpBoost")
+local MainEspPlayers = UI:WaitForChild("MainEspPlayers")
+local MainShowBrainrots = UI:WaitForChild("MainShowBrainrots")
 
+local function JumpBoost()
+	local ButtonTurnJumpBoost = MainJumpBoost:WaitForChild("ButtonTurnJumpBoost")
+	local LabelTurn = ButtonTurnJumpBoost:WaitForChild("TextLabel")
 
-local MainSpeed = ScrollMenu:WaitForChild("MainSpeed")
-local MainTeleportUp = ScrollMenu:WaitForChild("MainTeleportUp")
-local MainTeleportDirectly = ScrollMenu:WaitForChild("MainTeleportDirectly")
--- ScrollMenu
+	ButtonTurnJumpBoost.MouseButton1Click:Connect(function()
+		IsJumpBoost = not IsJumpBoost
 
-
--- ScrollSettings
-local MainBindFlyPlayer = ScrollSettings:WaitForChild("BindPlayerFly")
-local MainBindNoclip = ScrollSettings:WaitForChild("BindNoclip")
-local MainBindEspPlayer = ScrollSettings:WaitForChild("BindEspPlayer")
-local MainBindFreezePlayer = ScrollSettings:WaitForChild("BindFreezePlayer")
-
-local MainBindSpeed = ScrollSettings:WaitForChild("BindSpeed")
-local MainBindTeleportUp = ScrollSettings:WaitForChild("BindTeleportUp")
-local MainBindTeleportDirectly = ScrollSettings:WaitForChild("BindTeleportDirectly")
-
-MainTouch.Visible = true
-
-MainSpeed.BoxSpeed.Text = Default_Speed_Player
-MainTeleportUp.BoxTeleportUp.Text = HowMany_TeleportUp
-MainTeleportDirectly.BoxTeleportDirectly.Text = HowMany_TeleportDirectly
-
-print(MainTeleportDirectly.BoxTeleportDirectly.Text)
-
--- ScrollSettings
-MainBindFlyPlayer.BoxFly.FocusLost:Connect(function(Enter)
-	if Enter then
-
-
-		if MainBindFlyPlayer.BoxFly.Text == "None" or MainBindFlyPlayer.BoxFly.Text == "" then
-			Bind_Player_Fly = "RightControl"
-			MainBindFlyPlayer.BoxFly.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindFlyPlayer.BoxFly.Text = string.upper(MainBindFlyPlayer.BoxFly.Text)
-
-		Bind_Player_Fly = string.upper(MainBindFlyPlayer.BoxFly.Text)
-	end
-
-	if not Enter then
-		if MainBindFlyPlayer.BoxFly.Text == "None" or MainBindFlyPlayer.BoxFly.Text == "" then
-			Bind_Player_Fly = "RightControl"
-			MainBindFlyPlayer.BoxFly.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-		end
-	end
-end)
-
-
-MainBindNoclip.BoxNoclip.FocusLost:Connect(function(Enter)
-	if Enter then
-
-
-		if MainBindNoclip.BoxNoclip.Text == "None" or MainBindNoclip.BoxNoclip.Text == "" then
-			Bind_Player_Noclip = "RightControl"
-			MainBindNoclip.BoxNoclip.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindNoclip.BoxNoclip.Text = string.upper(MainBindNoclip.BoxNoclip.Text)
-
-		Bind_Player_Noclip = string.upper(MainBindNoclip.BoxNoclip.Text)
-	end
-
-	if not Enter then
-		if MainBindNoclip.BoxNoclip.Text == "None" or MainBindNoclip.BoxNoclip.Text == "" then
-			Bind_Player_Noclip = "RightControl"
-			MainBindNoclip.BoxNoclip.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-		end
-	end
-end)
-
-
-MainBindEspPlayer.BoxEspPlayer.FocusLost:Connect(function(Enter)
-	if Enter then
-
-
-		if MainBindEspPlayer.BoxEspPlayer.Text == "None" or MainBindEspPlayer.BoxEspPlayer.Text == "" then
-			Bind_Esp_Player = "RightControl"
-			MainBindEspPlayer.BoxEspPlayer.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindEspPlayer.BoxEspPlayer.Text = string.upper(MainBindEspPlayer.BoxEspPlayer.Text)
-
-		Bind_Esp_Player = string.upper(MainBindEspPlayer.BoxEspPlayer.Text)
-	end
-
-	if MainBindEspPlayer.BoxEspPlayer.Text == "None" or MainBindEspPlayer.BoxEspPlayer.Text == "" then
-		Bind_Esp_Player = "RightControl"
-		MainBindEspPlayer.BoxEspPlayer.Text = "None"
-		--	print("TextBox is None save bind to: RightControl")
-		return
-	end
-end)
-
-MainBindFreezePlayer.BoxFreezePlayer.FocusLost:Connect(function(Enter)
-	if Enter then
-
-
-		if MainBindFreezePlayer.BoxFreezePlayer.Text == "None" or MainBindFreezePlayer.BoxFreezePlayer.Text == "" then
-			Bind_Freeze_Player = "RightControl"
-			MainBindFreezePlayer.BoxFreezePlayer.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindFreezePlayer.BoxFreezePlayer.Text = string.upper(MainBindFreezePlayer.BoxFreezePlayer.Text)
-
-		Bind_Freeze_Player = string.upper(MainBindFreezePlayer.BoxFreezePlayer.Text)
-	end
-
-	if MainBindFreezePlayer.BoxFreezePlayer.Text == "None" or MainBindFreezePlayer.BoxFreezePlayer.Text == "" then
-		Bind_Freeze_Player = "RightControl"
-		MainBindEspPlayer.BoxEspPlayer.Text = "None"
-		--	print("TextBox is None save bind to: RightControl")
-		return
-	end
-end)
-	
-
-MainBindSpeed.BoxSpeed.FocusLost:Connect(function(Enter)
-	if Enter then
-
-		if MainBindSpeed.BoxSpeed.Text == "None" or MainBindSpeed.BoxSpeed.Text == "" then
-			Bind_Player_Speed = "RightControl"
-			MainBindSpeed.BoxSpeed.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindSpeed.BoxSpeed.Text = string.upper(MainBindSpeed.BoxSpeed.Text)
-
-		Bind_Player_Speed = string.upper(MainBindSpeed.BoxSpeed.Text)
-	end
-
-	if not Enter then
-		if MainBindSpeed.BoxSpeed.Text == "None" or MainBindSpeed.BoxSpeed.Text == "" then
-			Bind_Player_Speed = "RightControl"
-			MainBindSpeed.BoxSpeed.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-		end
-	end
-end)
-
-
-MainBindTeleportUp.BoxTeleportUp.FocusLost:Connect(function(Enter)
-	if Enter then
-
-
-		if MainBindTeleportUp.BoxTeleportUp.Text == "None" or MainBindTeleportUp.BoxTeleportUp.Text == "" then
-			Bind_TeleportUp = "RightControl"
-			MainBindTeleportUp.BoxTeleportUp.Text = "None"
-			--	print("TextBox is None save bind to: RightControl")
-			return
-		end
-
-		MainBindTeleportUp.BoxTeleportUp.Text = string.upper(MainBindTeleportUp.BoxTeleportUp.Text)
-
-		Bind_TeleportUp = string.upper(MainBindTeleportUp.BoxTeleportUp.Text)
-	end
-
-	if not Enter then
-		if MainBindTeleportUp.BoxTeleportUp.Text == "None" or MainBindTeleportUp.BoxTeleportUp.Text == "" then
-			Bind_TeleportUp = "RightControl"
-			MainBindTeleportUp.BoxTeleportUp.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-		end
-	end
-end)
-
-
-MainBindTeleportDirectly.BoxTeleportDirectly.FocusLost:Connect(function(Enter)
-	if Enter then
-
-		if MainBindTeleportDirectly.BoxTeleportDirectly.Text == "None" or MainBindTeleportDirectly.BoxTeleportDirectly.Text == "" then
-			Bind_TeleportDirectly = "RightControl"
-			MainBindTeleportDirectly.BoxTeleportDirectly.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-			return
-		end
-		MainBindTeleportDirectly.BoxTeleportDirectly.Text = string.upper(MainBindTeleportDirectly.BoxTeleportDirectly.Text)
-
-		Bind_TeleportDirectly = string.upper(MainBindTeleportDirectly.BoxTeleportDirectly.Text)
-	end
-
-	if not Enter then
-		if MainBindTeleportDirectly.BoxTeleportDirectly.Text == "None" or MainBindTeleportDirectly.BoxTeleportDirectly.Text == "" then
-			Bind_TeleportDirectly = "RightControl"
-			MainBindTeleportDirectly.BoxTeleportDirectly.Text = "None"
-			--		print("TextBox is None save bind to: RightControl")
-		end
-	end
-end)
-
-
-
-
-
-MainHack.ButtonSettings.MouseButton1Click:Connect(function()
-	ScrollSettings.Visible = true
-	ScrollMenu.Visible = false
-
-	MainHack.ButtonSettings.BackgroundColor3 = BackGroundClicked
-	MainHack.ButtonMenu.BackgroundColor3 = BackGroundUnClicked
-end)
-
-MainHack.ButtonMenu.MouseButton1Click:Connect(function()
-	ScrollSettings.Visible = false
-	ScrollMenu.Visible = true
-
-	MainHack.ButtonSettings.BackgroundColor3 = BackGroundUnClicked
-	MainHack.ButtonMenu.BackgroundColor3 = BackGroundClicked
-end)
-
-
-local function SystemButtons()
-	MainFlyPlayer.ButtonFly.MouseButton1Click:Connect(function()
-		Is_Player_Fly = not Is_Player_Fly
-
-		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
-
-		if Is_Player_Fly then
-			Part_Fly = Instance.new("Part")
-			Part_Fly.Size = Vector3.new(5, 0.6, 5)
-			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
-			Part_Fly.Transparency = 0.2
-			Part_Fly.Parent = workspace
+		if IsJumpBoost then
+			LabelTurn.Text = "ON"
+			ButtonTurnJumpBoost.BackgroundColor3 = BackGround_TurnON
 		else 
-			if Part_Fly then
-				Part_Fly:Destroy()
-				Part_Fly = nil
+			LabelTurn.Text = "OFF"
+			ButtonTurnJumpBoost.BackgroundColor3 = BackGround_TurnOFF
+		end
+	end)
+
+	MainJumpBoost.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 and Device == "PC" then
+			IsDragJump_Power = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
+		elseif Input.UserInputType == Enum.UserInputType.Touch and Device == "Mobile" then
+			IsDragJump_Power = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
+		end
+	end)
+end
+
+
+local function EspPlayers()
+	local ButtonTurnEspPlayers = MainEspPlayers:WaitForChild("ButtonTurnEspPlayers")
+	local LabelTurn = ButtonTurnEspPlayers:WaitForChild("TextLabel")
+
+	ButtonTurnEspPlayers.MouseButton1Click:Connect(function()
+		IsEspPlayers = not IsEspPlayers
+
+		if IsEspPlayers then
+			LabelTurn.Text = "ON"
+			ButtonTurnEspPlayers.BackgroundColor3 = BackGround_TurnON
+		else 
+			LabelTurn.Text = "OFF"
+			ButtonTurnEspPlayers.BackgroundColor3 = BackGround_TurnOFF
+		end
+	end)
+
+	MainEspPlayers.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 and Device == "PC" then
+			IsDrag_Esp_Players = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
+		elseif Input.UserInputType == Enum.UserInputType.Touch and Device == "Mobile" then
+			IsDrag_Esp_Players = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
+		end
+	end)
+end
+
+local function ShowBrainrots()
+	local ButtonTurnShowBrainrots = MainShowBrainrots:WaitForChild("ButtonTurnShowBrainrots")
+	local LabelTurn = ButtonTurnShowBrainrots:WaitForChild("TextLabel")
+
+	ButtonTurnShowBrainrots.MouseButton1Click:Connect(function()
+		IsShow_Brainrots = not IsShow_Brainrots
+
+		if IsShow_Brainrots then
+			LabelTurn.Text = "ON"
+			ButtonTurnShowBrainrots.BackgroundColor3 = BackGround_TurnON
+			
+			local PlotsFolder = workspace:WaitForChild("Plots")
+			if PlotsFolder then
+				for indexPlot,plot in pairs(PlotsFolder:GetChildren()) do
+					for indexBase, brainrot in pairs(plot:GetChildren()) do
+						if brainrot:IsA("Model") and brainrot.Name ~= "Model" and brainrot.Name ~= "FriendPanel" then
+							for indexbrainrot, namebrainrot in ipairs(TableBrainrots) do
+								if brainrot.Name == namebrainrot then
+									local BillBoardGui = Instance.new("BillboardGui")
+									BillBoardGui.Name = "BillBoardUI"
+									BillBoardGui.AlwaysOnTop = true
+									BillBoardGui.Size = UDim2.new(10, 0,4, 0)
+									BillBoardGui.ResetOnSpawn = false
+									BillBoardGui.Parent = brainrot
+
+									local TextLabel = Instance.new("TextLabel")
+									TextLabel.Size = UDim2.new(1,0,1,0)
+									TextLabel.BackgroundTransparency = 1
+									TextLabel.TextScaled = true
+									TextLabel.TextStrokeTransparency = 0
+									TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+									TextLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+									TextLabel.Text = brainrot.Name
+									TextLabel.Parent = BillBoardGui
+									print("Found brainrot in table: " .. tostring(namebrainrot))
+								end
+							end
+						end
+					end
+				end
+			end
+		else 
+			LabelTurn.Text = "OFF"
+			ButtonTurnShowBrainrots.BackgroundColor3 = BackGround_TurnOFF
+			local PlotsFolder = workspace:WaitForChild("Plots")
+			if PlotsFolder then
+				for indexPlot,plot in pairs(PlotsFolder:GetChildren()) do
+					for indexBase, brainrot in pairs(plot:GetChildren()) do
+						if brainrot:IsA("Model") and brainrot.Name ~= "Model" and brainrot.Name ~= "FriendPanel" then
+							local BillBoardGui = brainrot:FindFirstChild("BillBoardUI")
+							if BillBoardGui then
+								BillBoardGui:Destroy()
+							end
+						end
+					end
+				end
 			end
 		end
-		MainFlyPlayer.ButtonFly.Text = "Player Fly: " .. tostring(Is_Player_Fly)
 	end)
-	
-	
-	
-	MainNNoclip.ButtonNoclip.MouseButton1Click:Connect(function()
-		Is_Noclip_Player = not Is_Noclip_Player
 
-		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
-
-		MainNNoclip.ButtonNoclip.Text = "Player Noclip: " .. tostring(Is_Noclip_Player)
-	end)
-	
-	
-	MainEspPlayer.ButtonEspPlayer.MouseButton1Click:Connect(function()
-		Is_Esp_Player = not Is_Esp_Player
-
-		MainEspPlayer.ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
-
-	--	print(Is_Esp_Player)
-	end)
-	
-	MainFreezePlayer.ButtonEspPlayer.MouseButton1Click:Connect(function()
-		Is_Freeze_Player = not Is_Freeze_Player
-		
-		MainFreezePlayer.ButtonEspPlayer.Text = "Freeze Player: " .. tostring(Is_Freeze_Player)
-	end)
-	
-	
-	MainSpeed.ButtonSpeed.MouseButton1Click:Connect(function()
-		Is_Player_Speed = not Is_Player_Speed
-
-		--	print("Is_Player_Speed: " .. tostring(Is_Player_Speed))
-		
-		if Is_Player_Speed then
-			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
-		else 
-			Speed_Player = 16
-		end
-		
-		MainSpeed.ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
-		
-	--	print("нажали на кнопку! и Speed_Player: " .. tostring(Speed_Player) .. " Humanoid.WalkSpeed: " .. Humanoid.WalkSpeed)
-	end)
-	
-	MainSpeed.BoxSpeed.FocusLost:Connect(function(EnterPressed)
-		if EnterPressed then
-			
-			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
-			
-			MainSpeed.BoxSpeed.Text = tostring(Speed_Player)
-	--		print("ентер и Speed_Player: " .. tostring(Speed_Player) .. " Humanoid.WalkSpeed: " .. Humanoid.WalkSpeed)
-
-			--	print("Speed Hum: " .. Humanoid.WalkSpeed .. " Speed_Player: " .. Speed_Player)
-		end
-	end)
-	
-	
-	MainTeleportUp.ButtonTeleportUp.MouseButton1Click:Connect(function()
-		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,HowMany_TeleportUp,0)
-	end)
-	
-	MainTeleportUp.BoxTeleportUp.FocusLost:Connect(function(EnterPressed)
-		if EnterPressed then
-			HowMany_TeleportUp = tonumber(MainTeleportUp.BoxTeleportUp.Text) or 0
-
-			MainTeleportUp.BoxTeleportUp.Text = tostring(HowMany_TeleportUp)
-
-			--	print(HowMany_TeleportUp)
-		end
-	end)
-	
-	
-	MainTeleportDirectly.ButtonTeleportDirectly.MouseButton1Click:Connect(function()
-		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,0,-HowMany_TeleportDirectly)
-	end)
-	
-	MainTeleportDirectly.BoxTeleportDirectly.FocusLost:Connect(function(EnterPressed)
-		if EnterPressed then
-			HowMany_TeleportDirectly = tonumber(MainTeleportDirectly.BoxTeleportDirectly.Text) or 0
-
-			MainTeleportDirectly.BoxTeleportDirectly.Text = tostring(HowMany_TeleportDirectly)
-
-			--	print(HowMany_TeleportDirectly)
+	MainShowBrainrots.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 and Device == "PC" then
+			IsDrag_Show_Brainrots = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
+		elseif Input.UserInputType == Enum.UserInputType.Touch and Device == "Mobile" then
+			IsDrag_Show_Brainrots = true
+			--	print("Drag " .. tostring(IsDrag) .. "!")
 		end
 	end)
 end
 
+JumpBoost()
+EspPlayers()
+ShowBrainrots()
 
-SystemButtons()
-
-
-Button_Open_MainHack.MouseButton1Click:Connect(function()
-	MainHack.Visible = not MainHack.Visible
+UserInputService.InputBegan:Connect(function(Input, IsTyping)
+	if IsTyping then return end
 	
-	if not MainHack.Visible then
-		Button_Open_MainHack.Text = "<"
-	else 
-		Button_Open_MainHack.Text = ">"
-	end
-end)
-
-MainTouch.InputBegan:Connect(function(Input)
-	if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-		IsDrag = true
-	--	print(IsDrag)
-	elseif Input.UserInputType == Enum.UserInputType.Touch and Current_Device == "Mobile" then
-		IsDragMobile = true
-	--	print(IsDragMobile)
-	end
-end)
-
-MainTouch.InputEnded:Connect(function(Input)
-	if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-		IsDrag = false
-	--	print(IsDrag)
+	if Input.KeyCode == Enum.KeyCode.C and Device == "PC" then
+		local ButtonTurnJumpBoost:TextButton = MainJumpBoost:WaitForChild("ButtonTurnJumpBoost")
+		local LabelTurn:TextLabel = ButtonTurnJumpBoost:WaitForChild("TextLabel")
+		
+		IsJumpBoost = not IsJumpBoost
+		
+		if IsJumpBoost then
+			LabelTurn.Text = "ON"
+			ButtonTurnJumpBoost.BackgroundColor3 = BackGround_TurnON
+		else 
+			LabelTurn.Text = "OFF"
+			ButtonTurnJumpBoost.BackgroundColor3 = BackGround_TurnOFF
+		end
 	end
 end)
 
 UserInputService.InputEnded:Connect(function(Input, IsTyping)
 	if IsTyping then return end
 
-	if IsDragMobile and Current_Device == "Mobile" then
-		IsDragMobile = false
---		print(IsDragMobile)
+	if Input.UserInputType == Enum.UserInputType.MouseButton1 and IsDragJump_Power and Device == "PC" then
+		IsDragJump_Power = false
+	elseif IsDragJump_Power and Device == "Mobile" then
+		IsDragJump_Power = false
+	elseif Input.UserInputType == Enum.UserInputType.MouseButton1 and IsDrag_Esp_Players and Device == "PC" then
+		IsDrag_Esp_Players = false
+	elseif IsDrag_Esp_Players and Device == "Mobile" then
+		IsDrag_Esp_Players = false
+	elseif Input.UserInputType == Enum.UserInputType.MouseButton1 and IsDrag_Show_Brainrots and Device == "PC" then
+		IsDrag_Show_Brainrots = false
+	elseif IsDrag_Show_Brainrots and Device == "Mobile" then
+		IsDrag_Show_Brainrots = false
 	end
 end)
-
-
-UserInputService.InputBegan:Connect(function(Input, IsTyping)
-	if IsTyping then return end
-	
-	if Bind_Player_Fly and Input.KeyCode == Enum.KeyCode[Bind_Player_Fly] then
-		Is_Player_Fly = not Is_Player_Fly
-		
-		if Is_Player_Fly then
-			Part_Fly = Instance.new("Part")
-			Part_Fly.Size = Vector3.new(5, 0.6, 5)
-			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
-			Part_Fly.Transparency = 0.2
-			Part_Fly.Parent = workspace
-		else 
-			if Part_Fly then
-				Part_Fly:Destroy()
-				Part_Fly = nil
-			end
-		end
-		
-		MainFlyPlayer.ButtonFly.Text = "Player Fly: " .. tostring(Is_Player_Fly)
-	elseif Bind_Player_Noclip and Input.KeyCode == Enum.KeyCode[Bind_Player_Noclip] then
-		Is_Noclip_Player = not Is_Noclip_Player
-		
-		MainNNoclip.ButtonNoclip.Text = "Noclip Player: " .. tostring(Is_Noclip_Player)
-	elseif Bind_Esp_Player and Input.KeyCode == Enum.KeyCode[Bind_Esp_Player] then
-		Is_Esp_Player = not Is_Esp_Player
-		
-		MainEspPlayer.ButtonEspPlayer.Text = "Esp Player: " .. tostring(Is_Esp_Player)
-	elseif Bind_Player_Speed and Input.KeyCode == Enum.KeyCode[Bind_Player_Speed] then
-		Is_Player_Speed = not Is_Player_Speed
-		
-		if Is_Player_Speed then
-			Speed_Player = tonumber(MainSpeed.BoxSpeed.Text) or 0
-		else 
-			Speed_Player = 16
-		end
-		
-		MainSpeed.ButtonSpeed.Text = "Speed: " .. tostring(Is_Player_Speed)
-	elseif Bind_Freeze_Player and Input.KeyCode == Enum.KeyCode[Bind_Freeze_Player] then
-		Is_Freeze_Player = not Is_Freeze_Player
-		MainFreezePlayer.ButtonEspPlayer.Text = "Freeze Player: " .. tostring(Is_Freeze_Player)
-	
-	elseif Bind_TeleportUp and Input.KeyCode == Enum.KeyCode[Bind_TeleportUp] then
-		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,HowMany_TeleportUp,0)
-	elseif Bind_TeleportDirectly and Input.KeyCode == Enum.KeyCode[Bind_TeleportDirectly] then
-		Hrp.CFrame = Hrp.CFrame * CFrame.new(0,0,-HowMany_TeleportDirectly)
-	end
-end)
-
 
 RunService.RenderStepped:Connect(function()
-	Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	Character = LocalPlayer.Character
 	Humanoid = Character:WaitForChild("Humanoid")
-	Hrp = Character:WaitForChild("HumanoidRootPart")
-	
-	
-	
-	if not Hrp or not Humanoid or not Character then return end
-	
-	if Is_Player_Speed then
-		Humanoid.WalkSpeed = Speed_Player
-	else
-		Humanoid.WalkSpeed = Default_Speed_Player
-	end
-	
-	if Is_Noclip_Player then
-		for i,v in pairs(Character:GetChildren()) do
-			if v:IsA("BasePart") then
-				v.CanCollide = false
-			end
-		end
-	else 
-		for i,v in pairs(Character:GetChildren()) do
-			if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
-				v.CanCollide = false
-			else
-				if v:IsA("BasePart") and v.Name == "HumanoidRootPart" then
-					v.CanCollide = true
-				end
-			end
-		end
-	end
-	
-	if Is_Freeze_Player then
-		Hrp.Anchored = true
-	else 
-		Hrp.Anchored = false
-	end
-	
-	if Is_Esp_Player then
-		for i,v in pairs(Players:GetPlayers()) do
-			if v ~= LocalPlayer then
-				local CharOther = v.Character or v.CharacterAdded:Wait()
-				
-				if not CharOther then return end
-				
-				local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
-				
-				if CharOther and not Find_HightLight then
-					local HightLight = Instance.new("Highlight")
-					HightLight.Name = "HightLightHacks"
-					HightLight.FillTransparency = 0
-					HightLight.Enabled = true
-					HightLight.FillColor = Color3.fromRGB(255, 0, 4)
-					HightLight.OutlineTransparency = 0
-					HightLight.FillTransparency = 0.56
-					HightLight.OutlineColor = Color3.fromRGB(255, 0, 4)
-					HightLight.Parent = CharOther
-			--		print("Added to: " .. v.Name)
-				end
-			end
-		end
-	else 
-		if not Is_Esp_Player then
-			for i,v in ipairs(Players:GetPlayers()) do
-				if v ~= LocalPlayer then
-					local CharOther = v.Character or v.CharacterAdded:Wait()
-					
-					if not CharOther then return end
-					
-					local Find_HightLight = CharOther:FindFirstChild("HightLightHacks")
 
-					if CharOther and Find_HightLight then
-						Find_HightLight:Destroy()
-				--		print("Deleted to: " .. v.Name)
+	if IsJumpBoost then
+		Humanoid.UseJumpPower = true
+		Humanoid.JumpPower = Jump_Power
+	else 
+		Humanoid.UseJumpPower = false
+		Humanoid.JumpPower = Default_JumpPower
+	end
+
+	if IsEspPlayers then
+		for i,v in pairs(Players:GetPlayers()) do
+			local Character = v.Character
+			local Find_HightLight = Character:FindFirstChild("HackHightLight")
+
+
+			for i,part in pairs(Character:GetChildren()) do
+				if part:IsA("BasePart") and v.UserId ~= LocalPlayer.UserId then
+					if part.Name == "HumanoidRootPart" or part.Name == "__HITBOX" then
+						part.Transparency = 1
+					else 
+						part.Transparency = 0
+					end
+				end
+			end
+
+			if Character and not Find_HightLight and v.UserId ~= LocalPlayer.UserId then
+				local HightLight = Instance.new("Highlight")
+				HightLight.Name = "HackHightLight"
+				HightLight.FillColor = Color3.fromRGB(255, 0, 4)
+				HightLight.OutlineColor = Color3.fromRGB(255, 0, 4)
+				HightLight.OutlineTransparency = 0
+				HightLight.FillTransparency = 0.7
+				HightLight.Parent = Character
+			end
+		end
+	else 
+		for i,v in pairs(Players:GetPlayers()) do
+			local Character = v.Character
+			local Find_HightLight = Character:FindFirstChild("HackHightLight")
+
+			for i,part in pairs(Character:GetChildren()) do
+				if part:IsA("BasePart") and v.UserId ~= LocalPlayer.UserId then
+					if part.Name == "HumanoidRootPart" or part.Name == "__HITBOX" then
+						part.Transparency = 1
+					else 
+						part.Transparency = 0
+					end
+				end
+			end
+
+			if Character and Find_HightLight then
+				Find_HightLight:Destroy()
+			end
+		end
+	end
+	
+	
+	if IsShow_Brainrots then
+		local ButtonTurnShowBrainrots = MainShowBrainrots:WaitForChild("ButtonTurnShowBrainrots")
+		local LabelTurn = ButtonTurnShowBrainrots:WaitForChild("TextLabel")
+		LabelTurn.Text = "ON"
+		ButtonTurnShowBrainrots.BackgroundColor3 = BackGround_TurnON
+
+		local PlotsFolder = workspace:WaitForChild("Plots")
+		if PlotsFolder then
+			for indexPlot,plot in pairs(PlotsFolder:GetChildren()) do
+				for indexBase, brainrot in pairs(plot:GetChildren()) do
+					local Find_BillBoardGui = brainrot:FindFirstChild("BillBoardUI")
+					if brainrot:IsA("Model") and brainrot.Name ~= "Model" and brainrot.Name ~= "FriendPanel" and not Find_BillBoardGui then
+						for indexbrainrot, namebrainrot in ipairs(TableBrainrots) do
+							if brainrot.Name == namebrainrot then
+								local BillBoardGui = Instance.new("BillboardGui")
+								BillBoardGui.Name = "BillBoardUI"
+								BillBoardGui.AlwaysOnTop = true
+								BillBoardGui.Size = UDim2.new(10, 0,4, 0)
+								BillBoardGui.ResetOnSpawn = false
+								BillBoardGui.Parent = brainrot
+
+								local TextLabel = Instance.new("TextLabel")
+								TextLabel.Size = UDim2.new(1,0,1,0)
+								TextLabel.BackgroundTransparency = 1
+								TextLabel.TextScaled = true
+								TextLabel.TextStrokeTransparency = 0
+								TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+								TextLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+								TextLabel.Text = brainrot.Name
+								TextLabel.Parent = BillBoardGui
+								print("Found brainrot in table: " .. tostring(namebrainrot))
+							end
+						end
 					end
 				end
 			end
 		end
-	end
-	
-	if IsDrag and Current_Device == "PC" then
-		local MousePos = UserInputService:GetMouseLocation()
-	--	print(MousePos.X .. " " .. MousePos.Y)
-
-		MainTouch.Position = UDim2.new(0, MousePos.X - 150, 0, MousePos.Y - 60)
-	else
-		if IsDragMobile and Current_Device == "Mobile" then
-			local MousePos = UserInputService:GetMouseLocation()
-		--	print(MousePos.X .. " " .. MousePos.Y)
-
-			MainTouch.Position = UDim2.new(0, MousePos.X - 25, 0, MousePos.Y - 50)
+	else 
+		local ButtonTurnShowBrainrots = MainShowBrainrots:WaitForChild("ButtonTurnShowBrainrots")
+		local LabelTurn = ButtonTurnShowBrainrots:WaitForChild("TextLabel")
+		LabelTurn.Text = "OFF"
+		ButtonTurnShowBrainrots.BackgroundColor3 = BackGround_TurnOFF
+		local PlotsFolder = workspace:WaitForChild("Plots")
+		if PlotsFolder then
+			for indexPlot,plot in pairs(PlotsFolder:GetChildren()) do
+				for indexBase, brainrot in pairs(plot:GetChildren()) do
+					if brainrot:IsA("Model") and brainrot.Name ~= "Model" and brainrot.Name ~= "FriendPanel" then
+						local BillBoardGui = brainrot:FindFirstChild("BillBoardUI")
+						if BillBoardGui then
+							BillBoardGui:Destroy()
+						end
+					end
+				end
+			end
 		end
 	end
 end)
 
 task.spawn(function()
 	while task.wait() do
-		if Is_Player_Fly then
-			Part_Fly.CFrame = Hrp.CFrame * CFrame.new(0,-3.2,0)
+		if IsDragJump_Power and Device == "PC" then
+			MainJumpBoost.Position = UDim2.new(0, Mouse.X - 50, 0, Mouse.Y - 23)
+		else 
+			if IsDragJump_Power and Device == "Mobile" then
+				MainJumpBoost.Position = UDim2.new(0, Mouse.X - 25, 0, Mouse.Y - 15)
+			end
+		end
+	end
+end)
+
+task.spawn(function()
+	while task.wait() do
+		if IsDrag_Esp_Players and Device == "PC" then
+			MainEspPlayers.Position = UDim2.new(0, Mouse.X - 50, 0, Mouse.Y - 23)
+		else 
+			if IsDrag_Esp_Players and Device == "Mobile" then
+				MainEspPlayers.Position = UDim2.new(0, Mouse.X - 25, 0, Mouse.Y - 15)
+			end
+		end
+	end
+end)
+
+
+task.spawn(function()
+	while task.wait() do
+		if IsDrag_Show_Brainrots and Device == "PC" then
+			MainShowBrainrots.Position = UDim2.new(0, Mouse.X - 50, 0, Mouse.Y - 23)
+		else 
+			if IsDrag_Show_Brainrots and Device == "Mobile" then
+				MainShowBrainrots.Position = UDim2.new(0, Mouse.X - 25, 0, Mouse.Y - 15)
+			end
 		end
 	end
 end)
